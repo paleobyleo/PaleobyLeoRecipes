@@ -47,7 +47,7 @@ This release includes several important fixes and improvements to enhance your r
 
 ## Installation
 To install this release:
-1. Download the APK file
+1. Download the APK file (paleobyleorecipes-1.0.2.apk) from the Assets section below
 2. Enable "Install from unknown sources" in your device settings
 3. Open the APK file and follow the installation prompts
 
@@ -63,9 +63,14 @@ If you encounter any issues with this release, please:
 ```
 
 ### 3. Upload Release Assets
+This is the critical step to ensure users can download the APK:
+
 1. Click "Attach binaries by dropping them here or selecting them"
-2. Select the APK file from: `app/build/outputs/apk/release/paleobyleorecipes-1.0.2.apk`
-3. Make sure both the APK and release notes are included
+2. Navigate to and select the APK file from: `app/build/outputs/apk/release/paleobyleorecipes-1.0.2.apk`
+3. **Important**: Make sure the APK file appears in the "Assets" section
+4. You should see two files in Assets:
+   - `paleobyleorecipes-1.0.2.apk` (the installation file)
+   - `Source code (zip)` (automatically added by GitHub)
 
 ### 4. Publish Release
 1. Make sure "This is a pre-release" is unchecked
@@ -74,9 +79,18 @@ If you encounter any issues with this release, please:
 ## Release Verification
 After publishing, verify that:
 1. The release appears on the releases page
-2. The APK file is downloadable
+2. The APK file is downloadable from the Assets section
 3. The release notes are properly formatted
 4. The tag `v1.0.2` exists in the tags list
+
+## Troubleshooting
+If you only see "Source code (zip)" and not the APK file:
+1. Edit the release by clicking the pencil icon
+2. Scroll down to the "Assets" section
+3. Click "Delete" next to any existing assets if needed
+4. Re-upload the APK file by clicking "Attach binaries..."
+5. Select the APK file from `app/build/outputs/apk/release/paleobyleorecipes-1.0.2.apk`
+6. Save the changes
 
 ## Post-Release Steps
 1. Test the download link to ensure the APK works correctly

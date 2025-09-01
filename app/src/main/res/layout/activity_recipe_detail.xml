@@ -1,128 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".RecipeDetailActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
-
-        <ImageView
-            android:id="@+id/imageViewRecipe"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:contentDescription="Recipe image"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewRecipe"
-            tools:text="Recipe Title" />
-
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-            tools:text="Recipe description goes here. This is a longer text that describes the recipe." />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/linearLayoutInfo"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescription">
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Recipe Title in Button Style -->
+            <Button
+                android:id="@+id/buttonRecipeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Recipe"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="#8B4513"
+                app:strokeWidth="2dp"
+                android:textColor="#8B4513" />
+
+            <!-- Recipe Title -->
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:layout_marginTop="16dp"
+                tools:text="Recipe Title" />
+
+            <!-- Section Divider -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="________________________________________"
+                android:textColor="#9E9E9E"
+                android:gravity="center"
+                android:layout_marginVertical="8dp" />
+
+            <!-- Recipe Description -->
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#424242"
+                android:lineSpacingExtra="4dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                tools:text="Recipe description goes here. This is a longer text that describes the recipe." />
+
+            <!-- Section Divider -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="________________________________________"
+                android:textColor="#9E9E9E"
+                android:gravity="center"
+                android:layout_marginVertical="8dp" />
+
+            <!-- Recipe Info -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:background="#00000000" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:background="#8B4513"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/textViewPrepTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    tools:text="Prep: 15 min" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:background="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textViewCookTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    tools:text="Cook: 30 min" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:background="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textViewServings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    tools:text="4 Servings" />
+            </LinearLayout>
+
+            <!-- Extra space after Servings -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:background="#00000000" />
+
+            <!-- Ingredients Section -->
+            <TextView
+                android:id="@+id/textViewIngredientsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#8B4513"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_ingredients"
+                android:drawablePadding="8dp"
+                android:drawableTint="#8B4513"
+                tools:text="Ingredients" />
 
             <TextView
-                android:id="@+id/textViewPrepTime"
-                android:layout_width="0dp"
+                android:id="@+id/textViewIngredients"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                tools:text="Prep: 15 min" />
+                android:textSize="16sp"
+                android:textColor="#424242"
+                android:lineSpacingExtra="4dp"
+                tools:text="• 2 cups almond flour\n• 1/2 tsp baking soda\n• 1/4 tsp salt\n• 2 eggs\n• 1/4 cup honey"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:background="#00000000" />
+
+            <!-- Instructions Section -->
+            <TextView
+                android:id="@+id/textViewInstructionsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#8B4513"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_instructions"
+                android:drawablePadding="8dp"
+                android:drawableTint="#8B4513"
+                tools:text="Instructions" />
 
             <TextView
-                android:id="@+id/textViewCookTime"
-                android:layout_width="0dp"
+                android:id="@+id/textViewInstructions"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                tools:text="Cook: 30 min" />
+                android:textSize="16sp"
+                android:textColor="#424242"
+                android:lineSpacingExtra="4dp"
+                tools:text="1. Preheat oven to 350°F (175°C).\n\n2. In a large bowl, whisk together the dry ingredients.\n\n3. In another bowl, beat the eggs and honey until well combined.\n\n4. Gradually add the dry ingredients to the wet ingredients, mixing until just combined.\n\n5. Pour the batter into a greased baking dish and bake for 20-25 minutes until golden brown."
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
 
-            <TextView
-                android:id="@+id/textViewServings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                tools:text="Servings: 4" />
+            <!-- Bottom Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:background="#F5F5F5"
+                android:minHeight="24dp" />
+
         </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/textViewIngredientsLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Ingredients"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutInfo" />
+    <!-- REMOVED: FloatingActionButton for printing
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Print recipe"
+        app:srcCompat="@drawable/ic_print_white_24dp"
+        app:backgroundTint="#8B4513"
+        app:tint="#FFFFFF" /> -->
 
-        <TextView
-            android:id="@+id/textViewIngredients"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewIngredientsLabel"
-            tools:text="• Ingredient 1\n• Ingredient 2\n• Ingredient 3" />
-
-        <TextView
-            android:id="@+id/textViewInstructionsLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Instructions"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewIngredients" />
-
-        <TextView
-            android:id="@+id/textViewInstructions"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewInstructionsLabel"
-            tools:text="1. Step one\n\n2. Step two\n\n3. Step three" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

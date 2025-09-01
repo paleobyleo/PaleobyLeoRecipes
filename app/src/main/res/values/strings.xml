@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">PaleoRecipes</string>
+    <string name="app_name">PaleobyLeoRecipes</string>
+    <string name="recipe_image">Recipe image</string>
     <string name="title_activity_about_paleo">About Paleo</string>
     <string name="title_activity_recipes">Recipes</string>
     <string name="title_activity_meal_plan">Meal Plan</string>
@@ -15,8 +16,11 @@
     <string name="label_category">Category</string>
     <string name="label_difficulty">Difficulty</string>
     <string name="label_prep_time">Prep Time</string>
+    <string name="hint_prep_time">Prep time (minutes)</string>
     <string name="label_cook_time">Cook Time</string>
+    <string name="hint_cook_time">Cook time (minutes)</string>
     <string name="label_servings">Servings</string>
+    <string name="hint_servings">Number of servings</string>
     <string name="hint_ingredients">Ingredients</string>
     <string name="hint_instructions">Instructions</string>
     <string name="hint_notes">Notes</string>
@@ -65,17 +69,55 @@
     <string name="no_user_recipes">No user recipes found.</string>
     <string name="no_paleo_recipes">No paleo recipes found.</string>
     <string name="delete_recipe">Delete Recipe</string>
-    <string name="delete_confirmation_message">Are you sure you want to delete this recipe?</string>
+    <string name="delete_confirmation_message">Are you sure you want to delete the recipe "%s"?</string>
     <string name="delete">Delete</string>
     <string name="recipe_deleted">Recipe deleted.</string>
     <string name="cancel">Cancel</string>
-    <string name="preparing_to_print">Preparing to print...</string>
-    <string name="error_printing">Error printing recipe.</string>
-    <string name="prep_time_format">Prep Time: %s</string>
-    <string name="cook_time_format">Cook Time: %s</string>
-    <string name="servings_format">Servings: %s</string>
+    <string name="preparing_to_print">Preparing to print %1$s</string>
+    <string name="error_printing">Error printing: %1$s</string>
+    <string name="prep_time_format">Prep Time: %d min</string>
+    <string name="cook_time_format">Cook Time: %d min</string>
+    <string name="servings_format">Servings: %d</string>
     <string name="ingredients_header">Ingredients:</string>
     <string name="instructions_header">Instructions:</string>
-    <string name="printed_from_app">Printed from PaleoRecipes App</string>
+    <string name="printed_from_app">Printed from %1$s on %2$s</string>
     <string name="logo_description">Paleo Recipes Logo</string>
+    <string name="button_save_recipe">Save Recipe</string>
+
+    <!-- Recipe Search -->
+    <string name="recipe_search_title">Recipe Search</string>
+    <string name="no_recipes_found">No recipes found with these ingredients.</string>
+    <string name="recipe_image_content">Recipe image</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="error_loading_recipes">Error loading recipes. Please try again.</string>
+    <string name="searching_recipes">Searching for recipes...</string>
+    <string name="no_ingredients_provided">No ingredients provided for search</string>
+
+    <!-- API Error Messages -->
+    <string name="error_bad_request">Bad request. Please check your input and try again.</string>
+    <string name="error_unauthorized">Authentication required. Please log in again.</string>
+    <string name="error_forbidden">You don\'t have permission to access this resource.</string>
+    <string name="error_not_found">The requested resource was not found.</string>
+    <string name="error_request_timeout">Request timed out. Please try again.</string>
+    <string name="error_conflict">A conflict occurred. The resource may have been modified.</string>
+    <string name="error_too_many_requests">Too many requests. Please try again later.</string>
+    <string name="error_server_error">Server error. Please try again later.</string>
+    <string name="error_bad_gateway">Bad gateway. The server received an invalid response.</string>
+    <string name="error_service_unavailable">Service is temporarily unavailable. Please try again later.</string>
+    <string name="error_gateway_timeout">Gateway timeout. The server took too long to respond.</string>
+    <string name="error_unknown_http">HTTP error: %1$d. Please try again.</string>
+    <string name="error_connection_timeout">Connection timed out. Please check your internet connection.</string>
+    <string name="error_no_internet_connection">No internet connection. Please check your network settings.</string>
+    <string name="error_network_io">Network error occurred. Please try again.</string>
+    <string name="error_unknown">An unknown error occurred: %1$s</string>
+    <string name="export_recipes">Export Recipes</string>
+    <string name="import_recipes">Import Recipes</string>
+    <string name="export_success">Recipes exported successfully to %s</string>
+    <string name="export_failed">Failed to export recipes: %s</string>
+    <string name="import_success">Recipes imported successfully</string>
+    <string name="import_failed">Failed to import recipes: %s</string>
+    <string name="no_file_selected">No file selected</string>
+    <string name="select_backup_file">Select backup file</string>
+    <string name="backup_file_name">paleo_recipes_backup.json</string>
 </resources>

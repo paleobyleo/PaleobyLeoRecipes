@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Recipe Title -->
+    <TextView
+        android:id="@+id/printTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        android:text="Recipe Title" />
+
+    <!-- Recipe Image -->
+    <ImageView
+        android:id="@+id/printImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:background="#F5F5F5"
+        android:visibility="gone"
+        android:contentDescription="Recipe image"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Recipe Description -->
+    <TextView
+        android:id="@+id/printDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#424242"
+        android:lineSpacingMultiplier="1.2"
+        android:paddingBottom="24dp"
+        android:text="Recipe description goes here." />
+
+    <!-- Recipe Info -->
+    <LinearLayout
+        android:id="@+id/printInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFF3E0"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:id="@+id/printPrepTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="#E65100"
+            android:gravity="center"
+            android:text="Prep: 15 min" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="#A1887F"
+            android:layout_marginHorizontal="8dp"/>
+
+        <TextView
+            android:id="@+id/printCookTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="#E65100"
+            android:gravity="center"
+            android:text="Cook: 30 min" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="#A1887F"
+            android:layout_marginHorizontal="8dp"/>
+
+        <TextView
+            android:id="@+id/printServings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="#E65100"
+            android:gravity="center"
+            android:text="4 Servings" />
+    </LinearLayout>
+
+    <!-- Ingredients Section -->
+    <TextView
+        android:id="@+id/printIngredientsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INGREDIENTS"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#FF6D00"
+        android:drawablePadding="8dp"
+        android:paddingBottom="8dp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"/>
+
+    <TextView
+        android:id="@+id/printIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#424242"
+        android:lineSpacingMultiplier="1.4"
+        android:paddingBottom="24dp"
+        android:text="• 2 cups almond flour\n• 1/2 tsp baking soda\n• 1/4 tsp salt" />
+
+    <!-- Instructions Section -->
+    <TextView
+        android:id="@+id/printInstructionsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INSTRUCTIONS"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#FF6D00"
+        android:drawablePadding="8dp"
+        android:paddingBottom="8dp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"/>
+
+    <TextView
+        android:id="@+id/printInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#424242"
+        android:lineSpacingMultiplier="1.4"
+        android:paddingBottom="24dp"
+        android:text="1. Step one\n2. Step two\n3. Step three" />
+
+    <!-- Additional Notes Section -->
+    <TextView
+        android:id="@+id/printNotesLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADDITIONAL NOTES"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#FF6D00"
+        android:drawablePadding="8dp"
+        android:paddingBottom="8dp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"/>
+
+    <TextView
+        android:id="@+id/printNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#424242"
+        android:lineSpacingMultiplier="1.4"
+        android:paddingBottom="24dp"
+        android:text="Additional notes go here."/>
+
+</LinearLayout>

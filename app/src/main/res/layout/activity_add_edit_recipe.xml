@@ -45,26 +45,37 @@
             android:background="#FFCC80"
             android:layout_marginBottom="12dp"/>
 
-        <EditText
-            android:id="@+id/editTextTitle"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Recipe Title"
-            android:inputType="text"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="12dp"/>
+            style="@style/Widget.PaleoRecipes.TextInputLayout"
+            android:layout_marginBottom="12dp">
 
-        <EditText
-            android:id="@+id/editTextDescription"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Recipe Title"
+                android:inputType="text"
+                style="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description"
-            android:inputType="textMultiLine"
-            android:minLines="2"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="12dp"/>
+            style="@style/Widget.PaleoRecipes.TextInputLayout"
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:gravity="top"
+                style="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,38 +83,53 @@
             android:layout_marginBottom="12dp"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editTextPrepTime"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
-                android:hint="Prep Time (min)"
-                android:inputType="number"
-                android:padding="12dp"
-                android:background="@drawable/edit_text_background"/>
+                style="@style/Widget.PaleoRecipes.TextInputLayout">
 
-            <EditText
-                android:id="@+id/editTextCookTime"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPrepTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Prep Time (min)"
+                    android:inputType="number"
+                    style="@style/EditTextStyle"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
-                android:hint="Cook Time (min)"
-                android:inputType="number"
-                android:padding="12dp"
-                android:background="@drawable/edit_text_background"/>
+                style="@style/Widget.PaleoRecipes.TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextCookTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cook Time (min)"
+                    android:inputType="number"
+                    style="@style/EditTextStyle"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/editTextServings"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Servings"
-            android:inputType="number"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="20dp"/>
+            style="@style/Widget.PaleoRecipes.TextInputLayout"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextServings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Servings"
+                android:inputType="number"
+                style="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Ingredients Section -->
         <TextView
@@ -123,17 +149,22 @@
             android:background="#FFCC80"
             android:layout_marginBottom="12dp"/>
 
-        <EditText
-            android:id="@+id/editTextIngredients"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter one ingredient per line"
-            android:inputType="textMultiLine"
-            android:minLines="5"
-            android:gravity="top"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="20dp"/>
+            style="@style/Widget.PaleoRecipes.TextInputLayout"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter one ingredient per line"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:gravity="top"
+                style="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Instructions Section -->
         <TextView
@@ -153,17 +184,22 @@
             android:background="#FFCC80"
             android:layout_marginBottom="12dp"/>
 
-        <EditText
-            android:id="@+id/editTextInstructions"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter one instruction step per line"
-            android:inputType="textMultiLine"
-            android:minLines="5"
-            android:gravity="top"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="20dp"/>
+            style="@style/Widget.PaleoRecipes.TextInputLayout"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter one instruction step per line"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:gravity="top"
+                style="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Image Section -->
         <TextView
@@ -208,15 +244,20 @@
                 android:contentDescription="Selected image preview"/>
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/editTextImageUrl"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Image URL (optional)"
-            android:inputType="textUri"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="24dp"/>
+            style="@style/Widget.PaleoRecipes.TextInputLayout"
+            android:layout_marginBottom="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextImageUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Image URL (optional)"
+                android:inputType="textUri"
+                style="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Save Button -->
         <Button

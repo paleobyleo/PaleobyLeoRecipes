@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fridge_nav_graph"
+    app:startDestination="@id/fridgeFragment"
+    tools:ignore="MissingConstraints">
+
+    <fragment
+        android:id="@+id/fridgeFragment"
+        android:name="com.leo.paleorecipes.ui.fridge.FridgeFragment"
+        android:label="Fridge" />
+
+    <fragment
+        android:id="@+id/recipeSearchListFragment"
+        android:name="com.leo.paleorecipes.ui.search.RecipeSearchFragment"
+        android:label="Recipe Search" />
+
+</navigation>

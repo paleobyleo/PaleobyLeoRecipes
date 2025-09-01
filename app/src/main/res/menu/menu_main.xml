@@ -3,9 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/settings"
+        android:id="@+id/action_export_recipes"
+        android:orderInCategory="150"
+        android:title="Export Recipes"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_import_recipes"
+        android:orderInCategory="160"
+        android:title="Import Recipes"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_backup_location"
+        android:orderInCategory="170"
+        android:title="Show Backup Location"
         app:showAsAction="never" />
 
     <item

@@ -1,26 +1,45 @@
 @echo off
-echo Building release APK for PaleoRecipes...
+echo Paleo Recipes - Release Build Script
+echo ====================================
 
-REM Use the full path to gradlew.bat instead of using ./
+REM Check if gradlew exists
+if not exist gradlew.bat (
+    echo Error: gradlew.bat not found. Please run this script from the project root directory.
+    pause
+    exit /b 1
+)
+
+echo Cleaning project...
 call gradlew clean
+if %errorlevel% neq 0 (
+    echo Error: Clean failed
+    pause
+    exit /b 1
+)
+
+echo Building release APK...
 call gradlew assembleRelease
-
-echo.
-echo Copying APK to Downloads folder...
-mkdir "%USERPROFILE%\Downloads\PaleoRecipes" 2>nul
-
-REM Check if the APK exists before trying to copy it
-if exist "app\build\outputs\apk\release\app-release.apk" (
-    copy "app\build\outputs\apk\release\app-release.apk" "%USERPROFILE%\Downloads\PaleoRecipes\PaleoRecipes.apk"
-    echo.
-    echo Release APK created successfully!
-    echo Location: %USERPROFILE%\Downloads\PaleoRecipes\PaleoRecipes.apk
-) else (
-    echo.
-    echo ERROR: APK file not found at app\build\outputs\apk\release\app-release.apk
-    echo Build may have failed. Check the build output for errors.
+if %errorlevel% neq 0 (
+    echo Error: Release build failed
+    pause
+    exit /b 1
 )
 
 echo.
-echo You can now install this APK on other devices or transfer it to your SD card.
+echo Build completed successfully!
+echo Release APK can be found in: app\build\outputs\apk\release\
+echo.
+
+REM Check if APK exists
+if exist app\build\outputs\apk\release\app-release.apk (
+    echo Release APK generated: app-release.apk
+) else (
+    echo Warning: Release APK not found in expected location
+)
+
+echo.
+echo To install on a connected device, run:
+echo adb install app\build\outputs\apk\release\app-release.apk
+echo.
+
 pause

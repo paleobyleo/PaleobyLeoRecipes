@@ -7,27 +7,36 @@ import android.print.PrintManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leo.paleorecipes.data.Recipe
 import com.leo.paleorecipes.databinding.ActivityRecipeListBinding
+import com.leo.paleorecipes.utils.RecipeBackupManager
 import com.leo.paleorecipes.viewmodel.RecipeViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RecipeListActivity : AppCompatActivity() {
 
     private val TAG = "RecipeListActivity"
     private lateinit var binding: ActivityRecipeListBinding
-    private lateinit var viewModel: RecipeViewModel
+    private val viewModel: RecipeViewModel by viewModels()
     private lateinit var adapter: RecipeAdapter
     private var isUserRecipes = false
     private var editMode = false
     private var printMode = false
+
+    @Inject
+    lateinit var recipeBackupManager: RecipeBackupManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,9 +76,6 @@ class RecipeListActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.tap_to_print), Toast.LENGTH_LONG).show()
             }
 
-            // Initialize ViewModel
-            viewModel = ViewModelProvider(this)[RecipeViewModel::class.java]
-
             // Setup RecyclerView
             setupRecyclerView()
 
@@ -81,17 +87,57 @@ class RecipeListActivity : AppCompatActivity() {
 
             // Setup FAB
             setupFab()
-
         } catch (e: Exception) {
             Log.e(TAG, "Error in onCreate: ${e.message}", e)
             Toast.makeText(this, "Error initializing app: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        Log.d(TAG, "onCreateOptionsMenu called")
+        menuInflater.inflate(R.menu.menu_main, menu)
+        Log.d(TAG, "Menu inflated with ${menu.size()} items")
+        // Log each menu item
+        for (i in 0 until menu.size()) {
+            val item = menu.getItem(i)
+            Log.d(TAG, "Menu item $i: ${item.title} (ID: ${item.itemId})")
+        }
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-            return true
+        Log.d(TAG, "onOptionsItemSelected called with item ID: ${item.itemId}")
+        when (item.itemId) {
+            android.R.id.home -> {
+                Log.d(TAG, "Home button pressed")
+                onBackPressedDispatcher.onBackPressed()
+                return true
+            }
+            R.id.action_export_recipes -> {
+                Log.d(TAG, "Export recipes menu item pressed")
+                exportRecipes()
+                return true
+            }
+            R.id.action_import_recipes -> {
+                Log.d(TAG, "Import recipes menu item pressed")
+                importRecipes()
+                return true
+            }
+            R.id.action_about -> {
+                Log.d(TAG, "About menu item pressed")
+                startActivity(Intent(this, AboutPaleoActivity::class.java))
+                return true
+            }
+            R.id.action_exit -> {
+                Log.d(TAG, "Exit menu item pressed")
+                finishAffinity()
+                return true
+            }
+            R.id.action_backup_location -> {
+                Log.d(TAG, "Show backup location menu item pressed")
+                showBackupLocationInfo()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -105,22 +151,46 @@ class RecipeListActivity : AppCompatActivity() {
                     if (printMode) {
                         printRecipe(recipe)
                     } else {
-                        val intent = Intent(this, RecipeDetailActivity::class.java)
-                        intent.putExtra("recipe", recipe)
-                        startActivity(intent)
+                        try {
+                            Log.d(TAG, "Starting RecipeDetailActivity with recipe: ${recipe.title}")
+                            Log.d(TAG, "Recipe class: ${recipe.javaClass.name}")
+
+                            val intent = Intent(this@RecipeListActivity, RecipeDetailActivity::class.java).apply {
+                                // Ensure we're using the correct Recipe class
+                                val recipeToPass = recipe as? com.leo.paleorecipes.data.Recipe
+                                    ?: throw IllegalStateException("Incorrect Recipe class: ${recipe.javaClass.name}")
+
+                                putExtra("recipe", recipeToPass)
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                                Log.d(TAG, "Intent extras: ${this.extras}")
+                            }
+
+                            startActivity(intent)
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error starting RecipeDetailActivity: ${e.message}", e)
+                            runOnUiThread {
+                                Toast.makeText(
+                                    this@RecipeListActivity,
+                                    "Error opening recipe: ${e.message}",
+                                    Toast.LENGTH_LONG,
+                                ).show()
+                            }
+                        }
                     }
                 },
                 onEditClick = { recipe ->
-                    val intent = Intent(this, AddEditRecipeActivity::class.java)
-                    intent.putExtra("recipe", recipe)
+                    val intent = Intent(this, AddEditRecipeActivity::class.java).apply {
+                        putExtra("recipe", recipe as com.leo.paleorecipes.data.Recipe)
+                    }
                     startActivity(intent)
                 },
                 onDeleteClick = { recipe ->
-                    showDeleteConfirmationDialog(recipe)
+                    showDeleteConfirmationDialog(recipe as com.leo.paleorecipes.data.Recipe)
                 },
                 onPrintClick = { recipe ->
-                    printRecipe(recipe)
-                }
+                    printRecipe(recipe as com.leo.paleorecipes.data.Recipe)
+                },
             )
 
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -133,7 +203,7 @@ class RecipeListActivity : AppCompatActivity() {
 
     private fun setupSearch() {
         try {
-            val searchEditText = findViewById<EditText>(R.id.editTextSearch)
+            val searchEditText = binding.editTextSearch
             Log.d(TAG, "Search EditText found: ${searchEditText != null}")
 
             searchEditText?.addTextChangedListener(object : TextWatcher {
@@ -173,12 +243,17 @@ class RecipeListActivity : AppCompatActivity() {
         try {
             Log.d(TAG, "Performing search with query: $query")
             if (isUserRecipes) {
-                viewModel.searchUserRecipes(query).observe(this) { recipes ->
+                viewModel.searchUserRecipes(query)
+                // Observe the search results LiveData
+                viewModel.searchResults.observe(this) { recipes ->
                     adapter.submitList(recipes)
                     updateEmptyView(recipes.isEmpty())
                 }
             } else {
-                viewModel.searchPaleoRecipes(query).observe(this) { recipes ->
+                // For paleo recipes, search by ingredients
+                viewModel.searchRecipesByIngredients(listOf(query))
+                // Observe the search results LiveData
+                viewModel.searchResults.observe(this) { recipes ->
                     adapter.submitList(recipes)
                     updateEmptyView(recipes.isEmpty())
                 }
@@ -191,17 +266,23 @@ class RecipeListActivity : AppCompatActivity() {
     private fun observeViewModel() {
         try {
             Log.d(TAG, "Observing ViewModel data")
-            if (isUserRecipes) {
-                viewModel.allUserRecipes.observe(this) { recipes ->
-                    adapter.submitList(recipes)
-                    updateEmptyView(recipes.isEmpty())
+            // For now, we'll use allUserRecipes for both cases since that's what's available
+            // You might want to add allPaleoRecipes to the ViewModel if needed
+            viewModel.allUserRecipes.observe(this) { recipes ->
+                // Filter recipes based on isUserRecipes flag if needed
+                val filteredRecipes = if (!isUserRecipes) {
+                    // If we're showing paleo recipes, filter out user-created ones
+                    recipes.filter { !it.isUserCreated }
+                } else {
+                    recipes
                 }
+                adapter.submitList(filteredRecipes)
+                updateEmptyView(filteredRecipes.isEmpty())
             }
-            else {
-                viewModel.allPaleoRecipes.observe(this) { recipes ->
-                    adapter.submitList(recipes)
-                    updateEmptyView(recipes.isEmpty())
-                }
+
+            // If you need to load paleo recipes from an API, you can call:
+            if (!isUserRecipes) {
+                viewModel.searchRecipesByIngredients(listOf("paleo", "healthy"))
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error observing ViewModel: ${e.message}", e)
@@ -230,14 +311,14 @@ class RecipeListActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDeleteConfirmationDialog(recipe: Recipe) {
+    private fun showDeleteConfirmationDialog(recipe: com.leo.paleorecipes.data.Recipe) {
         try {
             AlertDialog.Builder(this)
                 .setTitle(getString(R.string.delete_recipe))
                 .setMessage(getString(R.string.delete_confirmation_message, recipe.title))
                 .setPositiveButton(getString(R.string.delete)) { _, _ ->
                     Log.d(TAG, "Deleting recipe: ${recipe.title}")
-                    viewModel.delete(recipe)
+                    viewModel.deleteRecipe(recipe)
                     Toast.makeText(this, getString(R.string.recipe_deleted), Toast.LENGTH_SHORT).show()
                 }
                 .setNegativeButton(getString(R.string.cancel), null)
@@ -247,7 +328,7 @@ class RecipeListActivity : AppCompatActivity() {
         }
     }
 
-    private fun printRecipe(recipe: Recipe) {
+    private fun printRecipe(recipe: com.leo.paleorecipes.data.Recipe) {
         try {
             Log.d(TAG, "Printing recipe: ${recipe.title}")
 
@@ -275,5 +356,231 @@ class RecipeListActivity : AppCompatActivity() {
         Log.d(TAG, "onResume called")
         // Refresh data when returning to this activity
         observeViewModel()
+    }
+
+    private fun exportRecipes() {
+        try {
+            Log.d(TAG, "Exporting recipes")
+            // Get all user recipes from the database
+            val recipes = viewModel.allUserRecipes.value
+            
+            if (recipes != null) {
+                // Filter to only user-created recipes
+                val userRecipes = recipes.filter { it.isUserCreated }
+                Log.d(TAG, "Found ${userRecipes.size} user recipes to export")
+                
+                if (userRecipes.isEmpty()) {
+                    Toast.makeText(
+                        this,
+                        "No user-created recipes found to export. Please add some recipes first.",
+                        Toast.LENGTH_LONG,
+                    ).show()
+                    return
+                }
+
+                // Export the recipes
+                val result = recipeBackupManager.exportRecipes(userRecipes)
+
+                if (result.isSuccess) {
+                    val filePath = result.getOrNull()
+                    Log.d(TAG, "Export successful: $filePath")
+                    Toast.makeText(
+                        this,
+                        "Recipes exported successfully!\n\nFile saved to:\n$filePath\n\n" +
+                        "You can find this file in your device's file manager.\n" +
+                        "Look for files named: paleo_recipes_backup_*.json",
+                        Toast.LENGTH_LONG,
+                    ).show()
+                } else {
+                    val error = result.exceptionOrNull()?.message ?: "Unknown error"
+                    Log.e(TAG, "Export failed: $error")
+                    Toast.makeText(
+                        this,
+                        "Export failed: $error",
+                        Toast.LENGTH_LONG,
+                    ).show()
+                }
+            } else {
+                // If recipes are null, try to load them first
+                Log.w(TAG, "Recipes data not available, attempting to load...")
+                Toast.makeText(
+                    this,
+                    "Loading recipes for export...",
+                    Toast.LENGTH_SHORT,
+                ).show()
+                
+                // Load recipes and then export
+                viewModel.loadAllUserRecipes()
+                
+                // Since loadAllUserRecipes is async, we need to observe the result
+                viewModel.allUserRecipes.observe(this) { loadedRecipes ->
+                    // Filter to only user-created recipes
+                    val userRecipes = loadedRecipes.filter { it.isUserCreated }
+                    Log.d(TAG, "Found ${userRecipes.size} user recipes to export after loading")
+                    
+                    if (userRecipes.isEmpty()) {
+                        Toast.makeText(
+                            this,
+                            "No user-created recipes found to export. Please add some recipes first.",
+                            Toast.LENGTH_LONG,
+                        ).show()
+                        
+                        // Remove observer after one use to prevent multiple exports
+                        viewModel.allUserRecipes.removeObservers(this)
+                        return@observe
+                    }
+
+                    // Export the recipes
+                    val result = recipeBackupManager.exportRecipes(userRecipes)
+
+                    if (result.isSuccess) {
+                        val filePath = result.getOrNull()
+                        Log.d(TAG, "Export successful: $filePath")
+                        Toast.makeText(
+                            this,
+                            "Recipes exported successfully!\n\nFile saved to:\n$filePath\n\n" +
+                            "You can find this file in your device's file manager.\n" +
+                            "Look for files named: paleo_recipes_backup_*.json",
+                            Toast.LENGTH_LONG,
+                        ).show()
+                    } else {
+                        val error = result.exceptionOrNull()?.message ?: "Unknown error"
+                        Log.e(TAG, "Export failed: $error")
+                        Toast.makeText(
+                            this,
+                            "Export failed: $error",
+                            Toast.LENGTH_LONG,
+                        ).show()
+                    }
+                    
+                    // Remove observer after one use to prevent multiple exports
+                    viewModel.allUserRecipes.removeObservers(this)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error exporting recipes", e)
+            Toast.makeText(
+                this,
+                "Error exporting recipes: ${e.message}",
+                Toast.LENGTH_LONG,
+            ).show()
+        }
+    }
+
+    private fun importRecipes() {
+        try {
+            Log.d(TAG, "Importing recipes")
+            // Launch file picker to select backup file
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "application/json"
+                addCategory(Intent.CATEGORY_OPENABLE)
+                // Add extra MIME types to make JSON files more visible
+                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/json", "text/plain", "application/octet-stream"))
+                // Try to direct to the Downloads/PaleoRecipes folder
+                val downloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS)
+                val paleoRecipesPath = java.io.File(downloadsPath, "PaleoRecipes")
+                // Note: We can't directly set the initial directory for ACTION_GET_CONTENT,
+                // but we can provide a hint to the user about where to look
+            }
+
+            importFileLauncher.launch(Intent.createChooser(intent, "Select backup file (.json) - Look in Downloads/PaleoRecipes/"))
+        } catch (e: Exception) {
+            Log.e(TAG, "Error importing recipes", e)
+            Toast.makeText(
+                this,
+                "Error importing recipes: ${e.message}",
+                Toast.LENGTH_LONG,
+            ).show()
+        }
+    }
+
+    /**
+     * Shows a toast with information about where backup files are stored
+     */
+    private fun showBackupLocationInfo() {
+        recipeBackupManager.showBackupLocationInfo(this)
+    }
+
+    // Activity result launcher for file selection
+    private val importFileLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+    ) { result ->
+        try {
+            Log.d(TAG, "Import file launcher result: ${result.resultCode}")
+            if (result.resultCode == RESULT_OK) {
+                val uri = result.data?.data
+                Log.d(TAG, "Import file URI: $uri")
+                if (uri != null) {
+                    // Show loading message
+                    Toast.makeText(this, "Importing recipes...", Toast.LENGTH_SHORT).show()
+                    
+                    // Import the recipes
+                    val importResult = recipeBackupManager.importRecipes(uri)
+
+                    if (importResult.isSuccess) {
+                        val recipes = importResult.getOrNull() ?: emptyList()
+                        Log.d(TAG, "Import successful, ${recipes.size} recipes imported")
+
+                        // Save imported recipes to database
+                        if (recipes.isNotEmpty()) {
+                            viewModel.insertRecipes(recipes)
+
+                            Toast.makeText(
+                                this,
+                                "Import successful!\n\nSuccessfully imported ${recipes.size} recipes.",
+                                Toast.LENGTH_LONG,
+                            ).show()
+                            
+                            // Refresh the recipe list
+                            observeViewModel()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "No recipes found in the selected file. Please make sure you're selecting a valid Paleo Recipes backup file.",
+                                Toast.LENGTH_LONG,
+                            ).show()
+                        }
+                    } else {
+                        val error = importResult.exceptionOrNull()?.message ?: "Unknown error"
+                        Log.e(TAG, "Import failed: $error")
+                        Toast.makeText(
+                            this,
+                            "Import failed: $error",
+                            Toast.LENGTH_LONG,
+                        ).show()
+                    }
+                } else {
+                    Log.w(TAG, "No file selected for import")
+                    Toast.makeText(
+                        this,
+                        "No file selected. Please select a JSON backup file.\n\n" +
+                        "Look for files named: paleo_recipes_backup_*.json\n" +
+                        "These files are typically located in your Downloads/PaleoRecipes folder.",
+                        Toast.LENGTH_LONG,
+                    ).show()
+                }
+            } else if (result.resultCode == RESULT_CANCELED) {
+                Log.d(TAG, "Import file selection cancelled")
+                Toast.makeText(
+                    this,
+                    "Import cancelled",
+                    Toast.LENGTH_SHORT,
+                ).show()
+            } else {
+                Log.e(TAG, "Import file selection failed with result code: ${result.resultCode}")
+                Toast.makeText(
+                    this,
+                    "Import failed. Please try again.",
+                    Toast.LENGTH_SHORT,
+                ).show()
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error handling imported file", e)
+            Toast.makeText(
+                this,
+                "Error importing file: ${e.message}",
+                Toast.LENGTH_LONG,
+            ).show()
+        }
     }
 }

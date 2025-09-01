@@ -1,7 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme for dark mode. -->
-    <style name="Theme.PaleoRecipes" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
+    <!-- Base application theme -->
+    <style name="Theme.PaleoRecipes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Completely disable splash screen -->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowShowWallpaper">false</item>
+
+        <!-- Primary brand colors -->
         <item name="colorPrimary">@color/orange_200</item>
         <item name="colorPrimaryVariant">@color/orange_200</item>
         <item name="colorOnPrimary">@color/black</item>

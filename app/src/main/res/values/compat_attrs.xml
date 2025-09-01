@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Declare fallback attributes expected by Material/CardView when using older support libraries -->
+    <attr name="colorCardViewBackground" format="color" />
+    <attr name="colorCardViewSurface" format="color" />
+
+    <!-- Provide the missing AppCompat style referenced by some Material components -->
+    <style name="Widget.AppCompat.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox" />
+</resources>

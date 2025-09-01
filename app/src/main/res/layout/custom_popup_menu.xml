@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="4dp"
+    android:elevation="8dp">
+
+    <TextView
+        android:id="@+id/menu_about"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@android:drawable/ic_dialog_info"
+        android:gravity="start|center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="About Paleo"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE" />
+
+    <TextView
+        android:id="@+id/menu_fridge"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@android:drawable/ic_menu_manage"
+        android:gravity="start|center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="My Fridge"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE" />
+
+    <TextView
+        android:id="@+id/menu_exit"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@android:drawable/ic_menu_close_clear_cancel"
+        android:gravity="start|center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="Exit App"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+</LinearLayout>

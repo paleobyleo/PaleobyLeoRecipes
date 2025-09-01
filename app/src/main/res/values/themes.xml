@@ -1,31 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.PaleoRecipes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange_500</item>
-        <item name="colorPrimaryVariant">@color/orange_500</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/black</item>
+    <!-- Base application theme. -->
+    <style name="Theme.PaleoRecipes" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Enable vector drawable support -->
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementsUseOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- Ensure status bar is not translucent -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        <!-- Background and surface colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+
+        <!-- Error colors -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+
+        <!-- Status bar color - use a visible color instead of transparent -->
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Material3 specific theme attributes -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="enforceMaterialTheme">true</item>
+        <item name="enforceTextAppearance">true</item>
+
+        <!-- Text colors -->
+        <item name="android:textColor">@color/on_background</item>
+        <item name="android:textColorPrimary">@color/on_background</item>
+        <item name="android:textColorSecondary">@color/on_surface_medium</item>
+        <item name="android:textColorHint">@color/textColorHint</item>
+
+        <!-- Button styles -->
+        <item name="materialButtonStyle">@style/Widget.PaleoRecipes.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.PaleoRecipes.Button.Outlined</item>
+
+        <!-- TextInputLayout style -->
+        <item name="textInputStyle">@style/Widget.PaleoRecipes.TextInputLayout</item>
+
+        <!-- CardView style -->
+        <item name="cardViewStyle">@style/Widget.PaleoRecipes.CardView</item>
+
+        <!-- Disable splash screen -->
+        <item name="android:windowDisablePreview">true</item>
+
+        <!-- Window settings - ensure not fullscreen -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+
+        <!-- Add missing color attributes -->
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
     </style>
 
+    <!-- Button style -->
+        <style name="Widget.PaleoRecipes.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <!-- Outlined button style -->
+        <style name="Widget.PaleoRecipes.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <!-- TextInputLayout style -->
+        <style name="Widget.PaleoRecipes.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeErrorColor">@color/error</item>
+        <item name="hintTextAppearance">@style/TextAppearance.PaleoRecipes.Hint</item>
+        <item name="android:textColorHint">@color/primary_light</item>
+    </style>
+
+    <!-- EditText style -->
+    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="boxStrokeColor">?attr/colorOutline</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxCornerRadiusBottomEnd">4dp</item>
+        <item name="boxCornerRadiusBottomStart">4dp</item>
+        <item name="boxCornerRadiusTopEnd">4dp</item>
+        <item name="boxCornerRadiusTopStart">4dp</item>
+    </style>
+
+    <!-- Hint text appearance -->
+        <style name="TextAppearance.PaleoRecipes.Hint" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/primary_light</item>
+    </style>
+
+    <!-- Toolbar style -->
+        <style name="Widget.PaleoRecipes.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextColor">@color/on_primary</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <!-- Popup menu style -->
+    <style name="Widget.PaleoRecipes.PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">#8B4513</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <!-- CardView style -->
+    <style name="Widget.PaleoRecipes.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="cardElevation">4dp</item>
+        <item name="strokeColor">@color/outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">8dp</item>
+    </style>
+
+    <!-- NoActionBar theme variant -->
     <style name="Theme.PaleoRecipes.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.PaleoRecipes.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.PaleoRecipes.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="OrangeButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">@color/orange_700</item>
-        <item name="android:textColor">@color/white</item>
+    <!-- ThemeOverlay for TextInputEditText -->
+    <style name="ThemeOverlay.PaleoRecipes.TextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorPrimary">@color/primary</item>
     </style>
+
+    <!-- Recipe Info Text Style -->
+    <style name="TextAppearance.PaleoRecipes.RecipeInfo" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:drawableTint">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="TextAppearance.PaleoRecipes.RecipeInfo.Time" parent="TextAppearance.PaleoRecipes.RecipeInfo">
+        <item name="android:drawableStart">@drawable/ic_recipe_clock</item>
+        <item name="drawableStartCompat">@drawable/ic_recipe_clock</item>
+    </style>
+
+    <style name="TextAppearance.PaleoRecipes.RecipeInfo.Servings" parent="TextAppearance.PaleoRecipes.RecipeInfo">
+        <item name="android:drawableStart">@drawable/ic_recipe_servings</item>
+        <item name="drawableStartCompat">@drawable/ic_recipe_servings</item>
+    </style>
+
+    <!-- Popup Overlay Theme -->
+    <style name="Theme.PaleoRecipes.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <!-- Theme with ActionBar for RecipeListActivity -->
+    <style name="Theme.PaleoRecipes.ActionBar" parent="Theme.PaleoRecipes">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+        <!-- Make the overflow button more visible -->
+        <item name="actionOverflowButtonStyle">@style/Widget.PaleoRecipes.ActionButton.Overflow</item>
+        <!-- Use saddle brown for action bar -->
+        <item name="colorPrimary">#8B4513</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <!-- Popup menu style -->
+        <item name="popupMenuStyle">@style/Widget.PaleoRecipes.PopupMenu</item>
+        <item name="android:itemTextAppearance">@style/TextAppearance.PaleoRecipes.Menu</item>
+    </style>
+
+    <!-- Custom overflow button style -->
+    <style name="Widget.PaleoRecipes.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">#FFFFFF</item> <!-- White color for better visibility -->
+        <item name="android:background">#8B4513</item> <!-- SaddleBrown color -->
+    </style>
+
+    <!-- Menu text appearance -->
+    <style name="TextAppearance.PaleoRecipes.Menu" parent="TextAppearance.AppCompat.Menu">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

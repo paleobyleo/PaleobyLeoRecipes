@@ -1,0 +1,163 @@
+// Top-level build.gradle
+buildscript {
+    ext.kotlin_version = '1.9.21'
+    ext.hilt_version = '2.50'
+    ext.nav_version = '2.7.7'
+    ext.compose_compiler_version = '1.5.10'  // Updated to latest compatible with Kotlin 1.9.22
+
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.22.0"
+    }
+}
+
+plugins {
+    id 'com.android.application' version '8.2.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.21' apply false
+    id 'com.google.dagger.hilt.android' version '2.50' apply false
+    id 'androidx.navigation.safeargs.kotlin' version '2.7.7' apply false
+    id 'com.diffplug.spotless' version '6.22.0' apply false
+    id 'com.github.ben-manes.versions' version '0.48.0' apply false
+}
+
+allprojects {
+
+    // Configure dependencyUpdates task only for root project
+    if (project == rootProject) {
+        apply plugin: 'com.github.ben-manes.versions'
+
+        dependencyUpdates {
+            checkForGradleUpdate = true
+            outputFormatter = 'json'
+            outputDir = "build/dependencyUpdates"
+            reportfileName = "report"
+
+            // Reject non-stable versions by default
+            rejectVersionIf {
+                isNonStable(it.candidate.version) && !isNonStable(it.currentVersion)
+            }
+        }
+    }
+}
+
+// Configure Spotless for all subprojects
+subprojects {
+    apply plugin: 'com.diffplug.spotless'
+
+    spotless {
+        kotlin {
+            target '**/*.kt'
+            ktlint()
+                .editorConfigOverride([
+                    'ktlint_standard_no-wildcard-imports': 'disabled',
+                    'ktlint_standard_property-naming': 'disabled',
+                    'ktlint_standard_discouraged-comment-location': 'disabled',
+                    'ktlint_standard_function-naming': 'disabled'
+                ])
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+
+        format 'xml', {
+            target '**/*.xml'
+            trimTrailingWhitespace()
+            indentWithSpaces(4)
+            endWithNewline()
+        }
+    }
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            android {
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_17
+                    targetCompatibility JavaVersion.VERSION_17
+                }
+
+                kotlinOptions {
+                    jvmTarget = '17'
+                    freeCompilerArgs += [
+                            "-Xjvm-default=all",
+                            "-opt-in=kotlin.RequiresOptIn",
+                            // Enable context receivers if needed
+                            // "-Xcontext-receivers",
+                    ]
+                }
+
+                // Configure lint options for all Android modules
+                lint {
+                    abortOnError false
+                    checkReleaseBuilds false
+                    ignoreWarnings true
+                }
+                
+                // Add this to prepare for 16 KB page size support
+                if (project.android.hasProperty('packagingOptions')) {
+                    project.android.packagingOptions.jniLibs.useLegacyPackaging = false
+                }
+            }
+        }
+    }
+}
+
+// Static method for the dependencyUpdates task
+static def isNonStable(String version) {
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+// Task to clean build directory
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}
+
+// Configure project properties
+ext {
+    // Define common versions for all modules
+    minSdkVersion = 24
+    targetSdkVersion = 35
+    compileSdkVersion = 35
+
+    // Test dependencies versions
+    junitVersion = '4.13.2'
+    androidxTestJunitVersion = '1.1.5'
+    espressoVersion = '3.5.1'
+
+    // AndroidX versions
+    androidxCoreVersion = '1.12.0'
+    androidxAppCompatVersion = '1.6.1'
+    materialVersion = '1.11.0'
+    constraintLayoutVersion = '2.1.4'
+
+    // Compose versions
+    composeBomVersion = '2024.01.00'
+    composeActivityVersion = '1.8.2'
+
+    // Room version
+    roomVersion = '2.6.1'
+
+    // Network versions
+    retrofitVersion = '2.9.0'
+    okhttpVersion = '4.12.0'
+
+    // Image loading
+    coilVersion = '2.5.0'
+}
+
+// Task to print Java version information
+tasks.register('printJavaInfo') {
+    doLast {
+        println "Java version: ${System.getProperty('java.version')}"
+        println "Java home: ${System.getProperty('java.home')}"
+        println "Java vendor: ${System.getProperty('java.vendor')}"
+        println "Gradle version: ${gradle.gradleVersion}"
+        println "Gradle Java home: ${org.gradle.internal.jvm.Jvm.current().javaHome}"
+    }
+}

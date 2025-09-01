@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BlackTextInputEditText">
+        <!-- Custom text color for the input text -->
+        <attr name="textColor" format="color" />
+        <!-- Custom text color for the hint -->
+        <attr name="hintTextColor" format="color" />
+        <!-- Custom text size -->
+        <attr name="textSize" format="dimension" />
+        <!-- Whether the text should be bold -->
+        <attr name="textBold" format="boolean" />
+        <!-- Custom background color -->
+        <attr name="backgroundTint" format="color" />
+    </declare-styleable>
+</resources>

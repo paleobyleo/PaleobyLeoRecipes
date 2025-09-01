@@ -1,0 +1,44 @@
+{
+  "currentVersion": {
+    "versionCode": 10002,
+    "versionName": "1.0.2",
+    "releaseDate": "2025-08-30",
+    "changes": [
+      "Implemented version tracking system",
+      "Added automatic version incrementing",
+      "Added version display in settings",
+      "Fixed version naming in APK files"
+    ]
+  },
+  "versionHistory": [
+    {
+      "versionCode": 10002,
+      "versionName": "1.0.2",
+      "releaseDate": "2025-08-30",
+      "changes": [
+        "Implemented version tracking system",
+        "Added automatic version incrementing",
+        "Added version display in settings",
+        "Fixed version naming in APK files"
+      ]
+    },
+    {
+      "versionCode": 10001,
+      "versionName": "1.0.1",
+      "releaseDate": "2025-08-30",
+      "changes": [
+        "Implemented version tracking system",
+        "Added automatic version incrementing",
+        "Added version display in settings"
+      ]
+    },
+    {
+      "versionCode": 10000,
+      "versionName": "1.0.0",
+      "releaseDate": "2025-08-30",
+      "changes": [
+        "Initial release"
+      ]
+    }
+  ]
+}

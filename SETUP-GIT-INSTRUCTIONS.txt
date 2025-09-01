@@ -1,0 +1,34 @@
+Git Setup Instructions for Paleo Recipes
+========================================
+
+It appears Git is not installed on your system. To publish your app to GitHub, you'll need to install Git first.
+
+1. Download and Install Git:
+   - Visit https://git-scm.com/downloads
+   - Download the Windows version
+   - Run the installer with default settings
+
+2. After installing Git, open a new Command Prompt or PowerShell window and navigate to your project directory:
+   cd C:\Users\leoja\AndroidStudioProjects\PaleobyLeoRecipes
+
+3. Initialize the Git repository:
+   git init
+
+4. Add all files to the repository:
+   git add .
+
+5. Make the initial commit:
+   git commit -m "Initial commit: Paleo Recipes v1.0.0"
+
+6. Create a new repository on GitHub:
+   - Go to https://github.com/new
+   - Name your repository (e.g., "PaleoRecipes")
+   - Don't initialize with a README
+   - Click "Create repository"
+
+7. Add the remote origin and push:
+   git remote add origin https://github.com/YOUR_USERNAME/PaleoRecipes.git
+   git branch -M main
+   git push -u origin main
+
+Your app is now ready for production and GitHub publishing! Once you've installed Git and followed these steps, your repository will be ready for collaboration and distribution.

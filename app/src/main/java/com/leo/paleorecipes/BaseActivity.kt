@@ -1,10 +1,8 @@
 package com.leo.paleorecipes
 
 import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import java.util.Locale
 
 open class BaseActivity : AppCompatActivity() {
 

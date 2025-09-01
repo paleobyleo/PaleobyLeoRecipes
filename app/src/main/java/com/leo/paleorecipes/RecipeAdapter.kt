@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+import coil.size.Scale
+import coil.transform.RoundedCornersTransformation
 import com.leo.paleorecipes.data.Recipe
 import com.leo.paleorecipes.databinding.ItemRecipeBinding
 
@@ -17,7 +19,7 @@ class RecipeAdapter(
     private val onRecipeClick: (Recipe) -> Unit,
     private val onEditClick: ((Recipe) -> Unit)? = null,
     private val onDeleteClick: ((Recipe) -> Unit)? = null,
-    private val onPrintClick: ((Recipe) -> Unit)? = null
+    private val onPrintClick: ((Recipe) -> Unit)? = null,
 ) : ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(RecipeDiffCallback()) {
 
     private val TAG = "RecipeAdapter"
@@ -27,15 +29,19 @@ class RecipeAdapter(
         val binding = ItemRecipeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         )
         return RecipeViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val recipe = getItem(position)
-        Log.d(TAG, "Binding ViewHolder for recipe: ${recipe.title}")
-        holder.bind(recipe)
+        try {
+            val recipe = getItem(position)
+            Log.d(TAG, "Binding ViewHolder for recipe: ${recipe.title}")
+            holder.bind(recipe)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error binding recipe at position $position: ${e.message}", e)
+        }
     }
 
     inner class RecipeViewHolder(private val binding: ItemRecipeBinding) :
@@ -43,33 +49,52 @@ class RecipeAdapter(
 
         fun bind(recipe: Recipe) {
             try {
-                // Set recipe title
-                binding.textViewTitle.text = recipe.title
+                // Debug logging
+                Log.d("RecipeAdapter", "Binding recipe: ${recipe.title}")
+                Log.d("RecipeAdapter", "Image URL: ${recipe.imageUrl}")
+
+                // Log view hierarchy
+                binding.root.let { root ->
+                    Log.d("RecipeAdapter", "Root view: ${root.javaClass.simpleName} (${root.width}x${root.height})")
+                    root.findViewById<View>(R.id.textViewPrepTime)?.let {
+                        Log.d("RecipeAdapter", "Prep time view bounds: ${it.left},${it.top} - ${it.right},${it.bottom}")
+                    }
+                }
+
+                // Set recipe title with null safety
+                binding.textViewTitle.text = recipe.title ?: "Untitled Recipe"
 
                 // Set recipe description (if available)
-                if (recipe.description.isNotEmpty()) {
+                if (!recipe.description.isNullOrEmpty()) {
                     binding.textViewDescription.text = recipe.description
                     binding.textViewDescription.visibility = View.VISIBLE
                 } else {
                     binding.textViewDescription.visibility = View.GONE
                 }
 
-                // Load recipe image (if available)
-                if (recipe.imageUrl.isNotEmpty()) {
-                    Glide.with(binding.imageViewRecipe.context)
-                        .load(recipe.imageUrl)
-                        .placeholder(R.drawable.placeholder_image)
-                        .error(R.drawable.error_image)
-                        .into(binding.imageViewRecipe)
-                    binding.imageViewRecipe.visibility = View.VISIBLE
+                // Load recipe image (if available) with proper scaling
+                if (!recipe.imageUrl.isNullOrEmpty()) {
+                    try {
+                        binding.imageViewRecipe.load(recipe.imageUrl) {
+                            crossfade(true)
+                            placeholder(android.R.drawable.ic_menu_gallery)
+                            error(android.R.drawable.ic_menu_report_image)
+                            scale(Scale.FILL) // This replaces CENTER_CROP functionality
+                            transformations(RoundedCornersTransformation(16f))
+                        }
+                        binding.imageViewRecipe.visibility = View.VISIBLE
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error loading image for recipe: ${recipe.title}", e)
+                        binding.imageViewRecipe.visibility = View.GONE
+                    }
                 } else {
                     binding.imageViewRecipe.visibility = View.GONE
                 }
 
                 // Set recipe info
-                binding.textViewPrepTime.text = "Prep: ${recipe.prepTime} min"
-                binding.textViewCookTime.text = "Cook: ${recipe.cookTime} min"
-                binding.textViewServings.text = "Serves: ${recipe.servings}"
+                binding.textViewPrepTime.text = "${recipe.prepTime} min"
+                binding.textViewCookTime.text = "${recipe.cookTime} min"
+                binding.textViewServings.text = recipe.servings.toString()
 
                 // Show edit/delete buttons in edit mode
                 if (editMode && recipe.isUserCreated) {

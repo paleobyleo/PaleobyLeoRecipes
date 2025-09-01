@@ -1,0 +1,18 @@
+tasks.register('showJavaVersion') {
+    doLast {
+        println "Java Version: ${System.getProperty('java.version')}"
+        println "Java Home: ${System.getProperty('java.home')}"
+        println "Java Vendor: ${System.getProperty('java.vendor')}"
+        println "Java VM Version: ${System.getProperty('java.vm.version')}"
+        println "Java VM Vendor: ${System.getProperty('java.vm.vendor')}"
+        
+        // Check if Java 17 features are available
+        try {
+            def version = Runtime.version()
+            println "Java Runtime Version: $version"
+            println "Java Feature Version: ${version.feature()}"
+        } catch (Exception e) {
+            println "Could not determine Java runtime version: ${e.message}"
+        }
+    }
+}

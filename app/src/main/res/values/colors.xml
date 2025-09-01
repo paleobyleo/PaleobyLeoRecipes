@@ -1,17 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary colors -->
+    <color name="primary">#FF6D00</color>  <!-- Vibrant Orange -->
+    <color name="primary_dark">#E65100</color>  <!-- Darker Orange -->
+    <color name="primary_light">#FF9E40</color>  <!-- Lighter Orange -->
+    <color name="colorPrimaryVariant">#FF9E40</color>  <!-- Same as primary_light -->
 
-    <color name="orange">#FFA500</color>
-    <color name="dark_orange">#FF8C00</color>
-    <color name="light_orange">#FFD700</color>
-    <color name="orange_700">#FFFF5722</color> <!-- Changed to a standard orange color -->
-    <color name="orange_500">#FFFF9800</color>
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <!-- Primary container colors (Material 3) -->
+    <color name="primary_container">#FFDBC8</color>  <!-- Light orange container -->
+    <color name="on_primary_container">#2B1700</color>  <!-- Dark text on primary container -->
+
+    <!-- Secondary colors -->
+    <color name="secondary">#7D5800</color>  <!-- Dark amber -->
+    <color name="secondary_light">#B37C00</color>  <!-- Lighter amber -->
+    <color name="on_secondary">#FFFFFF</color>  <!-- White on secondary -->
+    <color name="colorSecondaryVariant">#B37C00</color>  <!-- Same as secondary_light -->
+    <color name="secondary_container">#FFDEA6</color>  <!-- Light amber container -->
+    <color name="on_secondary_container">#271900</color>  <!-- Dark text on secondary container -->
+
+    <!-- Background and surface colors -->
+    <color name="background">#FF000000</color>  <!-- Solid black background -->
+    <color name="background_light">#FF000000</color>  <!-- Solid black background -->
+    <color name="surface">#FF212121</color>  <!-- Dark gray surface -->
+    <color name="surface_variant">#43464B</color>  <!-- Slightly lighter gray for surface variants -->
+    <color name="on_surface">#FFFFFF</color>  <!-- White text on dark surfaces -->
+    <color name="on_surface_medium">#B0B0B0</color>  <!-- Light gray for medium emphasis text -->
+    <color name="on_surface_variant">#C5C5D1</color>  <!-- Lighter gray for surface variants -->
+
+    <!-- Error colors (Material 3) -->
+    <color name="error_container">#FFDAD6</color>  <!-- Light red container -->
+    <color name="on_error_container">#410002</color>  <!-- Dark text on error container -->
+
+    <!-- Text colors -->
+    <color name="on_primary">#FFFFFF</color>  <!-- White text on primary colors -->
+    <color name="on_background">#FFFFFF</color>  <!-- White text on black background -->
+
+    <!-- Status bar and navigation -->
+    <color name="status_bar">#E65100</color>  <!-- Dark Orange -->
+    <color name="navigation_bar">#000000</color>  <!-- Black -->
+
+    <!-- Standard colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Text colors -->
+    <color name="textColorPrimary">#FFFFFF</color>  <!-- Changed to white for dark theme -->
+    <color name="textColorSecondary">#B0B0B0</color>  <!-- Lighter gray for secondary text -->
+    <color name="textColorHint">#757575</color>  <!-- Medium gray for hints -->
+
+    <!-- Outline color -->
+    <color name="outline">#757575</color>
+
+    <!-- State colors -->
+    <color name="success">#4CAF50</color>  <!-- Green -->
+    <color name="error">#F44336</color>  <!-- Red -->
+    <color name="warning">#FFC107</color>  <!-- Amber -->
+    <color name="info">#2196F3</color>  <!-- Blue -->
+
+    <!-- Legacy colors (for compatibility) -->
+    <color name="colorPrimary">@color/primary_dark</color>
+    <color name="colorPrimaryDark">@color/primary_dark</color>
+    <color name="colorAccent">@color/primary_dark</color>
+
+    <!-- Other colors -->
+    <color name="purple_500">#9C27B0</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="teal_200">#80DEEA</color>
+    <color name="teal_700">#00897B</color>
+
+    <!-- Launcher background -->
+    <color name="ic_launcher_background">#FF6D00</color>  <!-- Vibrant Orange -->
+
+    <!-- Add missing color attributes -->
+    <color name="colorOutline">@color/outline</color>
 </resources>

@@ -1,17 +1,75 @@
 <resources>
     <style name="Theme.PaleoRecipes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color for dark mode. -->
-        <item name="colorPrimary">@color/orange_200</item>
-        <item name="colorPrimaryVariant">@color/orange_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color for dark mode. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color for dark mode. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here for dark mode. -->
-        <item name="colorSurface">@color/black</item>
-        <item name="colorOnSurface">@color/white</item>
+        <!-- Completely disable splash screen -->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowShowWallpaper">false</item>
+
+        <!-- Primary brand color for dark mode -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+
+        <!-- Secondary brand color for dark mode -->
+        <item name="colorSecondary">@color/secondary_light</item>
+        <item name="colorSecondaryVariant">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+
+        <!-- Status bar and navigation colors -->
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+
+        <!-- Background color -->
+        <item name="android:windowBackground">@color/background</item>
+
+        <!-- Text colors - Force black text for better visibility -->
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
+        <item name="android:textColorTertiary">@android:color/black</item>
+        <item name="android:textColorHint">@color/primary</item>
+        <item name="editTextColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+
+        <!-- Accent color -->
+        <item name="colorAccent">@color/accent</item>
+
+        <!-- Other theme attributes -->
+        <item name="materialButtonStyle">@style/Widget.PaleoRecipes.Button</item>
+        <item name="cardViewStyle">@style/Widget.PaleoRecipes.CardView</item>
+        <item name="editTextStyle">@style/EditTextStyle</item>
+        <item name="textInputStyle">@style/Widget.PaleoRecipes.TextInputLayout</item>
+
+        <!-- Text input styling -->
+        <item name="colorControlNormal">@color/primary</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary_light</item>
+    </style>
+
+    <!-- Button Style for Dark Theme -->
+    <style name="Widget.PaleoRecipes.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <!-- CardView Style for Dark Theme -->
+    <style name="Widget.PaleoRecipes.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="strokeColor">@color/secondary_dark</item>
+        <item name="strokeWidth">1dp</item>
     </style>
 </resources>

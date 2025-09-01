@@ -1,0 +1,267 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+// Apply versioning plugin
+apply from: '../versioning.gradle'
+
+android {
+    namespace 'com.leo.paleorecipes'
+    compileSdk 35
+
+    lint {
+        baseline = file("lint-baseline.xml")
+        abortOnError false
+    }
+    buildToolsVersion "34.0.0"
+
+    defaultConfig {
+        applicationId "com.leo.paleorecipes"
+        minSdk 24
+        targetSdk 35
+        versionCode project.ext.getVersionCode()
+        versionName project.ext.getVersionName()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Enable multidex
+        multiDexEnabled true
+
+        // Production BuildConfig fields
+        buildConfigField "boolean", "ENABLE_LOGGING", "false"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        
+        // Add this to prepare for 16 KB page size support
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "IS_DEBUG", "false"
+            // Add signing config for release builds
+            signingConfig signingConfigs.debug // In production, use a proper release signing config
+            
+            // Customize the output APK filename for release builds
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    if (variant.name == "release") {
+                        outputFileName = "paleobyleorecipes-${variant.versionName}.apk"
+                    } else {
+                        outputFileName = "paleobyleorecipes-${variant.versionName}-debug.apk"
+                    }
+                }
+            }
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            minifyEnabled false
+            
+            // Customize the output APK filename for debug builds
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    if (variant.name == "release") {
+                        outputFileName = "paleobyleorecipes-${variant.versionName}.apk"
+                    } else {
+                        outputFileName = "paleobyleorecipes-${variant.versionName}-debug.apk"
+                    }
+                }
+            }
+        }
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+        freeCompilerArgs += [
+                '-Xjvm-default=all',
+                '-opt-in=kotlin.RequiresOptIn',
+                '-Xskip-prerelease-check'
+        ]
+    }
+
+    buildFeatures {
+        viewBinding true
+        compose true
+        buildConfig true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.7"
+    }
+    
+    packaging {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += 'META-INF/DEPENDENCIES'
+            excludes += 'META-INF/LICENSE'
+            excludes += 'META-INF/LICENSE.txt'
+            excludes += 'META-INF/license.txt'
+            excludes += 'META-INF/NOTICE'
+            excludes += 'META-INF/NOTICE.txt'
+            excludes += 'META-INF/notice.txt'
+            excludes += 'META-INF/ASL2.0'
+            excludes += 'META-INF/*.kotlin_module'
+        }
+        
+        // Exclude problematic native libraries to support 16 KB page sizes
+        jniLibs {
+            excludes += ['libmlkit_google_ocr_pipeline.so']
+            useLegacyPackaging false
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging false
+        }
+    }
+}
+
+dependencies {
+    // Core library desugaring
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+
+    // Core AndroidX
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    // Compose BOM (Bill of Materials)
+    def composeBom = platform('androidx.compose:compose-bom:2024.01.00')
+    implementation composeBom
+    androidTestImplementation composeBom
+
+    // Material3
+    implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.material3:material3-window-size-class'
+
+    // AndroidX Compose UI
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    // Material Icons
+    implementation 'androidx.compose.material:material-icons-extended'
+
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.8.2'
+    implementation 'androidx.activity:activity-ktx:1.8.2'
+
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.compose.runtime:runtime-livedata:1.6.2'
+
+    // Navigation Component
+    def nav_version = "2.7.7"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    // Hilt
+    def hilt_version = "2.50"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // Hilt Navigation Compose
+    implementation "androidx.hilt:hilt-navigation-compose:1.1.0"
+
+    // Room
+    def room_version = "2.6.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // Optional - Paging 3 Integration
+    implementation "androidx.room:room-paging:$room_version"
+
+    // WorkManager
+    def work_version = "2.9.0"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    // Hilt WorkManager integration
+    implementation "androidx.hilt:hilt-work:1.1.0"
+    kapt "androidx.hilt:hilt-compiler:1.1.0"
+
+    // Retrofit for API calls
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    // Gson for JSON parsing
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Timber for logging - included in both builds but used conditionally
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Coil for image loading
+    implementation 'io.coil-kt:coil-compose:2.5.0'
+    implementation 'io.coil-kt:coil:2.5.0'
+    
+    // Accompanist for additional Compose utilities
+    def accompanist_version = '0.32.0'
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
+
+    // CardView for your recipe items
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // ML Kit for OCR
+    implementation 'com.google.mlkit:text-recognition:16.0.0'
+
+    // Google AdMob SDK - temporarily commented out to fix launch issue
+    // implementation 'com.google.android.gms:play-services-ads:23.2.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+}
+
+kapt {
+    correctErrorTypes true
+    useBuildCache true
+    javacOptions {
+        option("-Xmaxerrs", 500)
+        option("-Xmaxwarns", 500)
+    }
+}
+
+// Update version before building
+project.afterEvaluate {
+    tasks.matching { it.name.startsWith('assemble') }.all {
+        it.dependsOn 'updateVersion'
+    }
+}

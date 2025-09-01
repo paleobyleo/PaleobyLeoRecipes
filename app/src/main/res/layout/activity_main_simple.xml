@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    android:background="@drawable/main_background">
+    android:background="?android:attr/colorBackground"
+    android:theme="@style/Theme.PaleoRecipes">
 
     <ImageView
         android:id="@+id/logoImageView"
@@ -22,7 +23,7 @@
         android:text="Paleo by Leo Recipes"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnBackground"
         android:fontFamily="sans-serif-medium"
         android:layout_marginBottom="36dp"/>
 
@@ -35,28 +36,38 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddRecipe"
+            style="@style/Widget.PaleoRecipes.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Your Own Recipe"
-            android:padding="16dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="24dp"
             android:textSize="16sp"
             app:cornerRadius="12dp"
             app:icon="@android:drawable/ic_menu_add"
-            app:iconGravity="textStart"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
             android:layout_marginBottom="16dp"
-            style="@style/OrangeButtonStyle"/>
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/on_primary"
+            app:iconTint="@color/on_primary"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewRecipes"
+            style="@style/Widget.PaleoRecipes.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Visit Paleo by Leo Socials"
-            android:padding="16dp"
+            android:text="Visit Paleo by Leo"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="24dp"
             android:textSize="16sp"
             app:cornerRadius="12dp"
             app:icon="@android:drawable/ic_menu_share"
-            app:iconGravity="textStart"
-            style="@style/OrangeButtonStyle"/>
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/on_primary"
+            app:iconTint="@color/on_primary"/>
     </LinearLayout>
 
     <!-- Secondary Actions Group -->
@@ -72,57 +83,79 @@
             android:text="Manage Your Recipes"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#555555"
+            android:textColor="?android:attr/textColorSecondary"
             android:layout_marginBottom="12dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewUserRecipes"
+            style="@style/Widget.PaleoRecipes.Button.Outlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Your Own Recipes"
-            android:padding="12dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
             app:cornerRadius="12dp"
             app:icon="@android:drawable/ic_menu_view"
-            app:iconGravity="textStart"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
             android:layout_marginBottom="12dp"
-            style="@style/OrangeButtonStyle"/>
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp"
+            android:textColor="?android:attr/textColorPrimary"
+            app:iconTint="?android:attr/textColorPrimary"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditRecipes"
+            style="@style/Widget.PaleoRecipes.Button.Outlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Edit Your Own Recipes"
-            android:padding="12dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
             app:cornerRadius="12dp"
             app:icon="@android:drawable/ic_menu_edit"
-            app:iconGravity="textStart"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
             android:layout_marginBottom="12dp"
-            style="@style/OrangeButtonStyle"/>
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp"
+            android:textColor="?android:attr/textColorPrimary"
+            app:iconTint="?android:attr/textColorPrimary"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPrintRecipe"
+            style="@style/Widget.PaleoRecipes.Button.Outlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Print Your Own Recipe"
-            android:padding="12dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
             app:cornerRadius="12dp"
-            app:icon="@android:drawable/ic_menu_send"
-            app:iconGravity="textStart"
-            style="@style/OrangeButtonStyle"/>
+            app:icon="@android:drawable/ic_menu_set_as"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp"
+            android:textColor="?android:attr/textColorPrimary"
+            app:iconTint="?android:attr/textColorPrimary"/>
     </LinearLayout>
 
     <!-- About Section -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAbout"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="About Paleo Diet"
-        android:padding="12dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="16dp"
         app:cornerRadius="12dp"
         app:icon="@android:drawable/ic_menu_info_details"
-        app:iconGravity="textStart"
+        app:iconGravity="start"
+        app:iconPadding="8dp"
         android:layout_marginBottom="24dp"
-        style="@style/OrangeButtonStyle"/>
+        android:textColor="@color/primary"
+        app:iconTint="@color/primary"/>
 
     <!-- Copyright notice at the bottom -->
     <TextView
@@ -130,7 +163,7 @@
         android:layout_height="wrap_content"
         android:text="Copyright © 2025 MIT License"
         android:textSize="12sp"
-        android:textColor="#666666"
+        android:textColor="?android:attr/textColorTertiary"
         android:layout_marginTop="8dp"/>
 
 </LinearLayout>

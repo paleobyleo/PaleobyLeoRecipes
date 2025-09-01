@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:paddingBottom="24dp"
+        android:background="@color/white">
 
         <TextView
             android:layout_width="match_parent"
@@ -58,10 +59,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="#FFF8F2">
 
                 <View
-                    android:layout_width="8dp"
+                    android:layout_width="6dp"
                     android:layout_height="match_parent"
                     android:background="#FF8C00"/>
 
@@ -70,8 +72,12 @@
                     android:layout_height="wrap_content"
                     android:text="• Emphasize whole, unprocessed foods\n• Eliminate modern processed foods\n• High-quality protein consumption\n• Moderate to lower carbohydrate intake\n• High fiber from fruits and vegetables\n• Healthy fat consumption from nuts, seeds, and oils\n• Nutrient density optimization\n• Balanced omega-3 to omega-6 fatty acid ratio"
                     android:textSize="16sp"
-                    android:textColor="#555555"
-                    android:padding="16dp"/>
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="4dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -100,18 +106,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="QUALITY PROTEINS"
-                android:textSize="12sp"
-                android:backgroundTint="#A1887F"
-                android:layout_marginEnd="4dp"/>
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:backgroundTint="#FF6D00"
+                android:textColor="@android:color/white"
+                android:paddingVertical="12dp"
+                android:layout_marginEnd="4dp"
+                style="@style/Widget.AppCompat.Button.Colored"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="FRESH PRODUCE"
-                android:textSize="12sp"
-                android:backgroundTint="#A1887F"
-                android:layout_marginStart="4dp"/>
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:backgroundTint="#FF6D00"
+                android:textColor="@android:color/white"
+                android:paddingVertical="12dp"
+                android:layout_marginStart="4dp"
+                style="@style/Widget.AppCompat.Button.Colored"/>
         </LinearLayout>
 
         <!-- Additional content that was missing -->
@@ -136,13 +152,28 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Meats: Grass-fed beef, lamb, pork, etc.\n• Poultry: Chicken, turkey, duck, etc.\n• Fish and seafood: Wild-caught fish, shellfish\n• Eggs: Preferably free-range\n• Vegetables: All types, especially leafy greens\n• Fruits: All types, preferably low-glycemic\n• Nuts and seeds: Almonds, walnuts, sunflower seeds, etc.\n• Healthy oils: Olive oil, coconut oil, avocado oil"
-                android:textSize="16sp"
-                android:textColor="#555555"
-                android:padding="16dp"/>
+                android:orientation="horizontal"
+                android:background="#FFF8F2">
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent"
+                    android:background="#FF8C00"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Meats: Grass-fed beef, lamb, pork, etc.\n• Poultry: Chicken, turkey, duck, etc.\n• Fish and seafood: Wild-caught fish, shellfish\n• Eggs: Preferably free-range\n• Vegetables: All types, especially leafy greens\n• Fruits: All types, preferably low-glycemic\n• Nuts and seeds: Almonds, walnuts, sunflower seeds, etc.\n• Healthy oils: Olive oil, coconut oil, avocado oil"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="4dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -164,16 +195,31 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFF3E0">
+            app:cardElevation="4dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Grains: Wheat, oats, barley, etc.\n• Legumes: Beans, lentils, peanuts, etc.\n• Dairy: Milk, cheese, yogurt, etc.\n• Refined sugar: Candy, soft drinks, most packaged sweets\n• Potatoes: Especially white potatoes\n• Highly processed foods: Anything with artificial ingredients\n• Salt: Especially refined table salt\n• Refined vegetable oils: Canola, soybean, etc."
-                android:textSize="16sp"
-                android:textColor="#795548"
-                android:padding="16dp"/>
+                android:orientation="horizontal"
+                android:background="#FFF8F2">
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent"
+                    android:background="#FF8C00"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Grains: Wheat, oats, barley, etc.\n• Legumes: Beans, lentils, peanuts, etc.\n• Dairy: Milk, cheese, yogurt, etc.\n• Refined sugar: Candy, soft drinks, most packaged sweets\n• Potatoes: Especially white potatoes\n• Highly processed foods: Anything with artificial ingredients\n• Salt: Especially refined table salt\n• Refined vegetable oils: Canola, soybean, etc."
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="4dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -197,13 +243,29 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Weight loss and improved body composition\n• Improved blood lipids\n• Reduced inflammation\n• Better blood glucose control\n• Improved satiety\n• Reduced risk of heart disease\n• Better digestive health\n• Clearer skin and reduced acne"
-                android:textSize="16sp"
-                android:textColor="#555555"
-                android:padding="16dp"/>
+                android:orientation="horizontal"
+                android:background="#FFF8F2">
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent"
+                    android:background="#FF8C00"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Weight loss and improved body composition\n• Better blood sugar control\n• Improved energy levels\n• Reduced inflammation\n• Better digestion\n• Improved nutrient density\n• Enhanced mental clarity\n• Better sleep quality"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="4dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <TextView

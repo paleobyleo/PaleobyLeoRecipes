@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data-extraction-rules>
+    <!-- Cloud backup rules -->
     <cloud-backup disableIfNoEncryptionCapabilities="true">
-        <exclude domain="file" path="temp_photos"/>
-        <include domain="file" path="some_other_file.txt"/>
+        <!-- Include all shared preferences -->
+        <include domain="sharedpref" path="."/>
+        <!-- Include all databases -->
+        <include domain="database" path="."/>
+        <!-- Include all files in the files directory -->
+        <include domain="file" path="."/>
     </cloud-backup>
+
+    <!-- Device transfer rules (for direct device-to-device transfer) -->
+    <device-transfer>
+        <!-- Include all shared preferences -->
+        <include domain="sharedpref" path="."/>
+        <!-- Include all databases -->
+        <include domain="database" path="."/>
+        <!-- Include all files in the files directory -->
+        <include domain="file" path="."/>
+    </device-transfer>
 </data-extraction-rules>

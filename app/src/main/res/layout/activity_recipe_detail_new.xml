@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true"
+    tools:context=".RecipeDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Recipe Image -->
+        <ImageView
+            android:id="@+id/imageViewRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:contentDescription="Recipe image"
+            android:scaleType="centerCrop"
+            android:background="#F5F5F5"
+            android:padding="8dp"
+            tools:src="@tools:sample/backgrounds/scenic"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Recipe Title -->
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="16dp"
+            tools:text="Recipe Title" />
+
+        <!-- Recipe Description -->
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#424242"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginBottom="24dp"
+            tools:text="Recipe description goes here. This is a longer text that describes the recipe." />
+
+        <!-- Recipe Info -->
+        <LinearLayout
+            android:id="@+id/linearLayoutInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FAFAFA"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:id="@+id/textViewPrepTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textColor="#616161"
+                android:textAlignment="center"
+                tools:text="Prep: 15 min" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#E0E0E0" />
+
+            <TextView
+                android:id="@+id/textViewCookTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textColor="#616161"
+                android:textAlignment="center"
+                tools:text="Cook: 30 min" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#E0E0E0" />
+
+            <TextView
+                android:id="@+id/textViewServings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textColor="#616161"
+                android:textAlignment="center"
+                tools:text="4 Servings" />
+        </LinearLayout>
+
+        <!-- Ingredients Section -->
+        <TextView
+            android:id="@+id/textViewIngredientsLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="16dp"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_ingredients"
+            android:drawableTint="@color/primary"/>
+
+        <TextView
+            android:id="@+id/textViewIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#424242"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginBottom="32dp"
+            tools:text="• 2 cups almond flour\n• 1/2 tsp baking soda\n• 1/4 tsp salt\n• 2 eggs\n• 1/4 cup honey"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
+
+        <!-- Instructions Section -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:id="@+id/textViewInstructionsLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instructions"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="16dp"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_instructions"
+            android:drawableTint="@color/primary"/>
+
+        <TextView
+            android:id="@+id/textViewInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#424242"
+            android:lineSpacingExtra="4dp"
+            tools:text="1. Preheat oven to 350°F (175°C).\n\n2. In a large bowl, whisk together the dry ingredients.\n\n3. In another bowl, beat the eggs and honey until well combined.\n\n4. Gradually add the dry ingredients to the wet ingredients, mixing until just combined.\n\n5. Pour the batter into a greased baking dish and bake for 20-25 minutes until golden brown."
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

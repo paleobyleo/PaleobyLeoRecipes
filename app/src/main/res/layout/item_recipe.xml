@@ -7,11 +7,12 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
-    app:cardBackgroundColor="?attr/colorSurface"> <!-- Added this line to ensure card background adapts -->
+    app:cardBackgroundColor="@color/surface">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
 
         <ImageView
             android:id="@+id/imageViewRecipe"
@@ -26,7 +27,7 @@
             android:id="@+id/orangeBar"
             android:layout_width="8dp"
             android:layout_height="0dp"
-            android:background="@color/orange_500"
+            android:background="#8B4513"
             app:layout_constraintStart_toEndOf="@id/imageViewRecipe"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -41,7 +42,7 @@
             android:layout_marginEnd="16dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="@color/on_surface"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/orangeBar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,15 +57,13 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:textSize="14sp"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="@color/on_surface_variant"
             android:maxLines="2"
             android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-            app:layout_constraintStart_toEndOf="@id/orangeBar"
-            app:layout_constraintEnd_toEndOf="parent"
             tools:text="This is a delicious paleo recipe that everyone will love. It's easy to make and full of flavor."/>
 
-        <!-- Recipe Info -->
+        <!-- Recipe Info Container -->
         <LinearLayout
             android:id="@+id/recipeInfoContainer"
             android:layout_width="0dp"
@@ -72,75 +71,94 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="12dp"
             android:orientation="horizontal"
+            android:weightSum="3"
             app:layout_constraintTop_toBottomOf="@id/textViewDescription"
             app:layout_constraintStart_toEndOf="@id/orangeBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/buttonContainer">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <!-- Prep Time -->
             <TextView
                 android:id="@+id/textViewPrepTime"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableStart="@android:drawable/ic_menu_recent_history"
+                android:layout_weight="1"
                 android:drawablePadding="4dp"
                 android:textSize="12sp"
-                android:textColor="?attr/colorOnSurface"
-                android:layout_marginEnd="16dp"
-                tools:text="Prep: 15 min"/>
+                android:textColor="@color/on_surface_variant"
+                app:drawableTint="@color/on_surface_variant"
+                tools:text="Prep: 15 min"
+                tools:drawableStart="@android:drawable/ic_menu_recent_history"/>
 
             <!-- Cook Time -->
             <TextView
                 android:id="@+id/textViewCookTime"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableStart="@android:drawable/ic_menu_recent_history"
+                android:layout_weight="1"
                 android:drawablePadding="4dp"
                 android:textSize="12sp"
-                android:textColor="?attr/colorOnSurface"
-                android:layout_marginEnd="16dp"
-                tools:text="Cook: 30 min"/>
+                android:textColor="@color/on_surface_variant"
+                app:drawableTint="@color/on_surface_variant"
+                tools:text="Cook: 30 min"
+                tools:drawableStart="@android:drawable/ic_menu_recent_history"/>
 
             <!-- Servings -->
             <TextView
                 android:id="@+id/textViewServings"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableStart="@android:drawable/ic_menu_myplaces"
+                android:layout_weight="1"
                 android:drawablePadding="4dp"
                 android:textSize="12sp"
-                android:textColor="?attr/colorOnSurface"
+                android:textColor="@color/on_surface_variant"
+                app:drawableTint="@color/on_surface_variant"
                 tools:text="Serves: 4"/>
         </LinearLayout>
 
+        <!-- Button Container - Only visible in edit mode -->
         <LinearLayout
             android:id="@+id/buttonContainer"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end"
+            android:visibility="gone"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription"
             app:layout_constraintStart_toEndOf="@id/orangeBar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
                 android:id="@+id/buttonEdit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                style="@style/Widget.MaterialComponents.Button.TextButton" />
+                android:layout_height="32dp"
+                android:text="EDIT"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                app:backgroundTint="#8B4513"
+                android:paddingHorizontal="12dp"
+                android:layout_marginEnd="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:cornerRadius="16dp"
+                app:strokeWidth="0dp"/>
 
             <Button
                 android:id="@+id/buttonDelete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                style="@style/Widget.MaterialComponents.Button.TextButton" />
+                android:layout_height="32dp"
+                android:text="DELETE"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:backgroundTint="@color/error"
+                android:paddingHorizontal="12dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:cornerRadius="16dp"
+                app:strokeWidth="0dp"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

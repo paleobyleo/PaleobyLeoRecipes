@@ -48,16 +48,22 @@
                 android:text="@string/button_add_photo" />
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.PaleoRecipes.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.leo.paleorecipes.ui.components.BlackTextInputEditText
                     android:id="@+id/editTextName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_recipe_name"
-                    android:inputType="textCapWords" />
+                    android:inputType="textCapWords"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/primary"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:theme="@style/ThemeOverlay.PaleoRecipes.TextInputEditText" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -95,114 +101,152 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.PaleoRecipes.TextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.leo.paleorecipes.ui.components.BlackTextInputEditText
                         android:id="@+id/editTextPrepTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/label_prep_time"
-                        android:inputType="number" />
+                        android:hint="@string/hint_prep_time"
+                        android:inputType="number"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/primary"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:theme="@style/ThemeOverlay.PaleoRecipes.TextInputEditText" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.PaleoRecipes.TextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.leo.paleorecipes.ui.components.BlackTextInputEditText
                         android:id="@+id/editTextCookTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/label_cook_time"
-                        android:inputType="number" />
+                        android:hint="@string/hint_cook_time"
+                        android:inputType="number"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/primary"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:theme="@style/ThemeOverlay.PaleoRecipes.TextInputEditText" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.PaleoRecipes.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.leo.paleorecipes.ui.components.BlackTextInputEditText
                     android:id="@+id/editTextServings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_servings"
-                    android:inputType="number" />
+                    android:hint="@string/hint_servings"
+                    android:inputType="number"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/primary"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:theme="@style/ThemeOverlay.PaleoRecipes.TextInputEditText" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.PaleoRecipes.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.leo.paleorecipes.ui.components.BlackTextInputEditText
                     android:id="@+id/editTextIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:hint="@string/hint_ingredients"
                     android:inputType="textMultiLine"
-                    android:lines="5" />
+                    android:lines="5"
+                    android:minLines="5"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/primary"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:theme="@style/ThemeOverlay.PaleoRecipes.TextInputEditText"
+                    android:backgroundTint="@android:color/transparent" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.PaleoRecipes.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.leo.paleorecipes.ui.components.BlackTextInputEditText
                     android:id="@+id/editTextInstructions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:hint="@string/hint_instructions"
                     android:inputType="textMultiLine"
-                    android:lines="8" />
+                    android:lines="5"
+                    android:minLines="5"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/primary"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:theme="@style/ThemeOverlay.PaleoRecipes.TextInputEditText"
+                    android:backgroundTint="@android:color/transparent" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.PaleoRecipes.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.leo.paleorecipes.ui.components.BlackTextInputEditText
                     android:id="@+id/editTextNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:hint="@string/hint_notes"
                     android:inputType="textMultiLine"
-                    android:lines="3" />
+                    android:lines="3"
+                    android:minLines="3"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/primary"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:theme="@style/ThemeOverlay.PaleoRecipes.TextInputEditText"
+                    android:backgroundTint="@android:color/transparent" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
+            <Button
+                android:id="@+id/buttonCancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="16dp"
+                android:text="@string/button_cancel"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp"
+                android:textColor="@color/primary" />
 
-                <Button
-                    android:id="@+id/buttonCancel"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:text="@string/button_cancel" />
-
-                <Button
-                    android:id="@+id/buttonSave"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:text="@string/button_save" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/buttonSaveRecipe"
+                style="@style/Widget.PaleoRecipes.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/button_save_recipe" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

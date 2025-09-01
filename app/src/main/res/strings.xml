@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
-    <string name="app_name">Paleo Recipes</string>
+    <string name="app_name">PaleobyLeoRecipes</string>
 
     <!-- Main Activity Buttons -->
     <string name="browse_recipes">Browse Recipes</string>

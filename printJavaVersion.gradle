@@ -1,0 +1,7 @@
+tasks.register('printJavaVersion') {
+    doLast {
+        println "Java version: ${System.getProperty('java.version')}"
+        println "Java home: ${System.getProperty('java.home')}"
+        println "Java vendor: ${System.getProperty('java.vendor')}"
+    }
+}

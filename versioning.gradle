@@ -1,0 +1,182 @@
+import java.text.SimpleDateFormat
+
+// Versioning configuration
+ext {
+    // Load version information from properties file
+    def versionPropsFile = file("version.properties")
+    def versionProps = new Properties()
+    
+    if (versionPropsFile.exists()) {
+        versionPropsFile.withInputStream { versionProps.load(it) }
+    }
+    
+    // Version name format: MAJOR.MINOR.PATCH
+    versionMajor = versionProps.getProperty("VERSION_MAJOR", "1").toInteger()
+    versionMinor = versionProps.getProperty("VERSION_MINOR", "0").toInteger()
+    versionPatch = versionProps.getProperty("VERSION_PATCH", "0").toInteger()
+    
+    // Get the current version code
+    getVersionCode = {
+        // You can implement different strategies here:
+        // 1. Simple increment: return versionMajor * 10000 + versionMinor * 100 + versionPatch
+        // 2. Date-based: return (new Date().format('yyMMdd')).toInteger()
+        // 3. Git commit count: return getGitCommitCount()
+        
+        // For now, using a simple increment strategy
+        return versionMajor * 10000 + versionMinor * 100 + versionPatch
+    }
+    
+    // Get the current version name
+    getVersionName = {
+        return "${versionMajor}.${versionMinor}.${versionPatch}"
+    }
+    
+    // Get current date for release date
+    getCurrentDate = {
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date())
+    }
+    
+    // Function to get git commit count (if using git)
+    getGitCommitCount = {
+        try {
+            def stdout = new ByteArrayOutputStream()
+            exec {
+                commandLine 'git', 'rev-list', '--count', 'HEAD'
+                standardOutput = stdout
+            }
+            return stdout.toString().trim().toInteger()
+        } catch (Exception e) {
+            // If git is not available, return a default value
+            return 1
+        }
+    }
+    
+    // Function to update version history JSON file
+    updateVersionHistory = { project ->
+        def versionHistoryFile = new File(project.projectDir, "app/src/main/assets/version_history.json")
+        if (versionHistoryFile.exists()) {
+            def jsonSlurper = new groovy.json.JsonSlurper()
+            def versionData = jsonSlurper.parse(versionHistoryFile)
+            
+            // Update current version
+            versionData.currentVersion.versionCode = getVersionCode()
+            versionData.currentVersion.versionName = getVersionName()
+            versionData.currentVersion.releaseDate = getCurrentDate()
+            
+            // Add to version history if not already present
+            def existingVersion = versionData.versionHistory.find { 
+                it.versionCode == getVersionCode() 
+            }
+            
+            if (!existingVersion) {
+                versionData.versionHistory.add(0, [
+                    versionCode: getVersionCode(),
+                    versionName: getVersionName(),
+                    releaseDate: getCurrentDate(),
+                    changes: ["Version update"]
+                ])
+            }
+            
+            // Write back to file
+            def jsonOutput = new groovy.json.JsonBuilder(versionData)
+            versionHistoryFile.write(jsonOutput.toPrettyString())
+        }
+    }
+}
+
+// Task to increment version patch number
+task incrementPatchVersion {
+    doLast {
+        def versionPropsFile = file("version.properties")
+        def versionProps = new Properties()
+        
+        if (versionPropsFile.exists()) {
+            versionPropsFile.withInputStream { versionProps.load(it) }
+        }
+        
+        def patch = versionProps.getProperty("VERSION_PATCH", "0").toInteger() + 1
+        versionProps.setProperty("VERSION_PATCH", patch.toString())
+        
+        versionPropsFile.withOutputStream { versionProps.store(it, null) }
+        
+        println "Incremented patch version to ${patch}"
+    }
+}
+
+// Task to increment version minor number
+task incrementMinorVersion {
+    doLast {
+        def versionPropsFile = file("version.properties")
+        def versionProps = new Properties()
+        
+        if (versionPropsFile.exists()) {
+            versionPropsFile.withInputStream { versionProps.load(it) }
+        }
+        
+        def minor = versionProps.getProperty("VERSION_MINOR", "0").toInteger() + 1
+        versionProps.setProperty("VERSION_MINOR", minor.toString())
+        versionProps.setProperty("VERSION_PATCH", "0") // Reset patch to 0
+        
+        versionPropsFile.withOutputStream { versionProps.store(it, null) }
+        
+        println "Incremented minor version to ${minor}, reset patch to 0"
+    }
+}
+
+// Task to increment version major number
+task incrementMajorVersion {
+    doLast {
+        def versionPropsFile = file("version.properties")
+        def versionProps = new Properties()
+        
+        if (versionPropsFile.exists()) {
+            versionPropsFile.withInputStream { versionProps.load(it) }
+        }
+        
+        def major = versionProps.getProperty("VERSION_MAJOR", "1").toInteger() + 1
+        versionProps.setProperty("VERSION_MAJOR", major.toString())
+        versionProps.setProperty("VERSION_MINOR", "0") // Reset minor to 0
+        versionProps.setProperty("VERSION_PATCH", "0") // Reset patch to 0
+        
+        versionPropsFile.withOutputStream { versionProps.store(it, null) }
+        
+        println "Incremented major version to ${major}, reset minor and patch to 0"
+    }
+}
+
+// Create version.properties file if it doesn't exist
+task createVersionProperties {
+    doLast {
+        def versionPropsFile = file("version.properties")
+        if (!versionPropsFile.exists()) {
+            def versionProps = new Properties()
+            versionProps.setProperty("VERSION_MAJOR", "1")
+            versionProps.setProperty("VERSION_MINOR", "0")
+            versionProps.setProperty("VERSION_PATCH", "0")
+            versionPropsFile.withOutputStream { versionProps.store(it, null) }
+            println "Created version.properties file"
+        }
+    }
+}
+
+// Task to update version information
+task updateVersion {
+    dependsOn createVersionProperties
+    doLast {
+        def versionPropsFile = file("version.properties")
+        def versionProps = new Properties()
+        
+        if (versionPropsFile.exists()) {
+            versionPropsFile.withInputStream { versionProps.load(it) }
+        }
+        
+        ext.versionMajor = versionProps.getProperty("VERSION_MAJOR", "1").toInteger()
+        ext.versionMinor = versionProps.getProperty("VERSION_MINOR", "0").toInteger()
+        ext.versionPatch = versionProps.getProperty("VERSION_PATCH", "0").toInteger()
+        
+        println "Current version: ${versionMajor}.${versionMinor}.${versionPatch}"
+        
+        // Update version history file
+        updateVersionHistory(project)
+    }
+}

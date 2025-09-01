@@ -12,6 +12,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.leo.paleorecipes.data.Recipe
 import com.leo.paleorecipes.ui.recipe.AddEditRecipeScreen
 import com.leo.paleorecipes.ui.theme.PaleoRecipesTheme
+import com.leo.paleorecipes.utils.AdUtils
 import com.leo.paleorecipes.viewmodel.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -26,6 +27,9 @@ class AddEditRecipeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         Log.d(TAG, "onCreate started")
+
+        // Load an interstitial ad for later use
+        AdUtils.loadInterstitialAd(this)
 
         // Use the correct method based on Android API level
         val editingRecipe = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -50,6 +54,10 @@ class AddEditRecipeActivity : ComponentActivity() {
                     is RecipeViewModel.RecipeUiState.Success -> {
                         Log.d(TAG, "Recipe saved successfully: ${state.message}")
                         Toast.makeText(this@AddEditRecipeActivity, state.message, Toast.LENGTH_SHORT).show()
+                        
+                        // Show interstitial ad when recipe is saved successfully
+                        AdUtils.showInterstitialAd(this@AddEditRecipeActivity)
+                        
                         finish()
                     }
                     is RecipeViewModel.RecipeUiState.Error -> {

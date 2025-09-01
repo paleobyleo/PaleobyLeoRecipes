@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leo.paleorecipes.data.Recipe
 import com.leo.paleorecipes.databinding.ActivityRecipeListBinding
+import com.leo.paleorecipes.utils.AdUtils
 import com.leo.paleorecipes.utils.RecipeBackupManager
 import com.leo.paleorecipes.viewmodel.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -384,6 +385,10 @@ class RecipeListActivity : AppCompatActivity() {
                 if (result.isSuccess) {
                     val filePath = result.getOrNull()
                     Log.d(TAG, "Export successful: $filePath")
+                    
+                    // Show interstitial ad when export is successful
+                    AdUtils.showInterstitialAd(this)
+                    
                     Toast.makeText(
                         this,
                         "Recipes exported successfully!\n\nFile saved to:\n$filePath\n\n" +
@@ -436,6 +441,10 @@ class RecipeListActivity : AppCompatActivity() {
                     if (result.isSuccess) {
                         val filePath = result.getOrNull()
                         Log.d(TAG, "Export successful: $filePath")
+                        
+                        // Show interstitial ad when export is successful
+                        AdUtils.showInterstitialAd(this)
+                        
                         Toast.makeText(
                             this,
                             "Recipes exported successfully!\n\nFile saved to:\n$filePath\n\n" +

@@ -6,6 +6,7 @@ import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.leo.paleorecipes.data.repository.RecipeRepository
 import com.leo.paleorecipes.di.HiltWorkerFactory
+import com.leo.paleorecipes.utils.AdMobUtils
 import com.leo.paleorecipes.utils.ImageUtils
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
@@ -56,9 +57,13 @@ class PaleoRecipesApplication : MultiDexApplication(), Configuration.Provider {
 
         Timber.d("Application created with WorkManager configuration: $workManagerConfiguration")
 
-        // Temporarily disable AdMob initialization to fix launch issue
-        // AdMobUtils.initialize(this)
-        // Timber.d("AdMob initialized")
+        // Initialize AdMob with error handling
+        try {
+            AdMobUtils.initialize(this)
+            Timber.d("AdMob initialized")
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to initialize AdMob, continuing without ads: ${e.message}")
+        }
 
         // Initialize image cache directory
         ImageUtils.initImageCache(this)

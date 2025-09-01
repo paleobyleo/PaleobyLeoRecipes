@@ -37,6 +37,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
 
+        <!-- AdMob App ID -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3031011439814812~3315442670"/>
+
         <!-- Main Compose Activity -->
         <activity
             android:name=".MainActivityCompose"

@@ -44,6 +44,13 @@ This release includes several important fixes and improvements to enhance your r
 - OCR scanning for recipe images
 - Dark mode support
 - Recipe categorization and favorites
+- AdMob integration for monetization - Added banner and interstitial ads
+
+## AdMob Integration
+This release includes AdMob integration with the following ad placements:
+- Banner ads at the bottom of the main screen
+- Interstitial ads when saving recipes
+- Interstitial ads when exporting recipes
 
 ## Installation
 To install this release:

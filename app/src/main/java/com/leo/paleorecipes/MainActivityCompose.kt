@@ -35,6 +35,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leo.paleorecipes.data.Recipe
+import com.leo.paleorecipes.ui.components.AdMobBanner
 import com.leo.paleorecipes.ui.theme.PaleoRecipesTheme
 import com.leo.paleorecipes.viewmodel.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -793,11 +794,11 @@ fun MainScreen(
             }
 
             // Temporarily disable AdMob Banner Ad
-            // AdMobBanner(
-            //     modifier = Modifier
-            //         .fillMaxWidth()
-            //         .padding(horizontal = 16.dp, vertical = 8.dp)
-            // )
+            AdMobBanner(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            )
 
             // Copyright message
             Box(

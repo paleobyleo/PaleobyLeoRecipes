@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="false"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The Paleo Diet"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The Paleolithic Diet, often referred to as the Paleo Diet, is a nutritional approach based on foods similar to those consumed during the Paleolithic era, spanning from approximately 2.5 million to 10,000 years ago. This dietary framework emphasizes whole foods that could be obtained through hunting and gathering, while excluding processed foods, grains, legumes, and dairy products that became common with the advent of agriculture."
+            android:textSize="16sp"
+            android:textColor="#555555"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Core Principles"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:background="#FF8C00"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Emphasize whole, unprocessed foods\n• Eliminate modern processed foods\n• High-quality protein consumption\n• Moderate to lower carbohydrate intake\n• High fiber from fruits and vegetables\n• Healthy fat consumption from nuts, seeds, and oils\n• Nutrient density optimization\n• Balanced omega-3 to omega-6 fatty acid ratio"
+                    android:textSize="16sp"
+                    android:textColor="#555555"
+                    android:padding="16dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recommended Foods"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="QUALITY PROTEINS"
+                android:textSize="12sp"
+                android:backgroundTint="#A1887F"
+                android:layout_marginEnd="4dp"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FRESH PRODUCE"
+                android:textSize="12sp"
+                android:backgroundTint="#A1887F"
+                android:layout_marginStart="4dp"/>
+        </LinearLayout>
+
+        <!-- Additional content that was missing -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Foods to Include"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Meats: Grass-fed beef, lamb, pork, etc.\n• Poultry: Chicken, turkey, duck, etc.\n• Fish and seafood: Wild-caught fish, shellfish\n• Eggs: Preferably free-range\n• Vegetables: All types, especially leafy greens\n• Fruits: All types, preferably low-glycemic\n• Nuts and seeds: Almonds, walnuts, sunflower seeds, etc.\n• Healthy oils: Olive oil, coconut oil, avocado oil"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:padding="16dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Foods to Avoid"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#FFF3E0">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Grains: Wheat, oats, barley, etc.\n• Legumes: Beans, lentils, peanuts, etc.\n• Dairy: Milk, cheese, yogurt, etc.\n• Refined sugar: Candy, soft drinks, most packaged sweets\n• Potatoes: Especially white potatoes\n• Highly processed foods: Anything with artificial ingredients\n• Salt: Especially refined table salt\n• Refined vegetable oils: Canola, soybean, etc."
+                android:textSize="16sp"
+                android:textColor="#795548"
+                android:padding="16dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Health Benefits"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Weight loss and improved body composition\n• Improved blood lipids\n• Reduced inflammation\n• Better blood glucose control\n• Improved satiety\n• Reduced risk of heart disease\n• Better digestive health\n• Clearer skin and reduced acne"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:padding="16dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note: While many people report health improvements on the Paleo diet, individual results may vary. Always consult with a healthcare professional before making significant dietary changes."
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:textColor="#757575"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp"/>
+    </LinearLayout>
+</ScrollView>

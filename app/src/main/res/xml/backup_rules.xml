@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- TODO: This place holder should be replaced with the actual files you want to backup. See https://developer.android.com/guide/topics/data/autobackup#IncludingFiles -->
+    <exclude domain="file" path="temp_photos"/>
+</full-backup-content>

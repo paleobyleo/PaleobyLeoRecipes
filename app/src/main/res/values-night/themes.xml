@@ -1,0 +1,17 @@
+<resources>
+    <style name="Theme.PaleoRecipes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color for dark mode. -->
+        <item name="colorPrimary">@color/orange_200</item>
+        <item name="colorPrimaryVariant">@color/orange_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color for dark mode. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color for dark mode. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here for dark mode. -->
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/white</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup disableIfNoEncryptionCapabilities="true">
+        <exclude domain="file" path="temp_photos"/>
+        <include domain="file" path="some_other_file.txt"/>
+    </cloud-backup>
+</data-extraction-rules>

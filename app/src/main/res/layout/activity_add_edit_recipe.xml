@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/recipe_background"
+    tools:context=".AddEditRecipeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header with orange background -->
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Your Recipe"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:padding="16dp"
+            android:background="@drawable/header_background"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Basic Information Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Basic Information"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@android:drawable/ic_menu_info_details"
+            android:drawablePadding="8dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFCC80"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Recipe Title"
+            android:inputType="text"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/editTextDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextPrepTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:hint="Prep Time (min)"
+                android:inputType="number"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"/>
+
+            <EditText
+                android:id="@+id/editTextCookTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:hint="Cook Time (min)"
+                android:inputType="number"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextServings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Servings"
+            android:inputType="number"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Ingredients Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@android:drawable/ic_menu_sort_by_size"
+            android:drawablePadding="8dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFCC80"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/editTextIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter one ingredient per line"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:gravity="top"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Instructions Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instructions"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@android:drawable/ic_menu_edit"
+            android:drawablePadding="8dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFCC80"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/editTextInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter one instruction step per line"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:gravity="top"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Image Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image (Optional)"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@android:drawable/ic_menu_gallery"
+            android:drawablePadding="8dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFCC80"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/buttonSelectImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Image (Optional)"
+                android:textSize="14sp"
+                android:background="@drawable/button_background"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="8dp"/>
+
+            <ImageView
+                android:id="@+id/imageViewPreview"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:contentDescription="Selected image preview"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextImageUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Image URL (optional)"
+            android:inputType="textUri"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SAVE RECIPE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:background="@drawable/button_background"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

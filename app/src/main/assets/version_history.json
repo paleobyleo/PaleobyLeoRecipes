@@ -1,9 +1,10 @@
 {
   "currentVersion": {
-    "versionCode": 10009,
-    "versionName": "1.0.9",
+    "versionCode": 10010,
+    "versionName": "1.0.10",
     "releaseDate": "2025-09-09",
     "changes": [
+      "Re-release of version 1.0.9 functionality after GitHub release deletion",
       "Recipe print functionality enhancements",
       "Reduced recipe title text size by 30%",
       "Made additional notes header smaller than other section headers",
@@ -13,6 +14,20 @@
     ]
   },
   "versionHistory": [
+    {
+      "versionCode": 10010,
+      "versionName": "1.0.10",
+      "releaseDate": "2025-09-09",
+      "changes": [
+        "Re-release of version 1.0.9 functionality after GitHub release deletion",
+        "Recipe print functionality enhancements",
+        "Reduced recipe title text size by 30%",
+        "Made additional notes header smaller than other section headers",
+        "Made text in additional notes field the same size as other text elements",
+        "Improved print pagination algorithm for better content distribution",
+        "Enhanced image handling in printed recipes"
+      ]
+    },
     {
       "versionCode": 10009,
       "versionName": "1.0.9",

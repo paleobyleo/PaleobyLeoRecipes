@@ -1,16 +1,68 @@
 {
   "currentVersion": {
-    "versionCode": 10002,
-    "versionName": "1.0.2",
-    "releaseDate": "2025-08-30",
+    "versionCode": 10009,
+    "versionName": "1.0.9",
+    "releaseDate": "2025-09-09",
     "changes": [
-      "Implemented version tracking system",
-      "Added automatic version incrementing",
-      "Added version display in settings",
-      "Fixed version naming in APK files"
+      "Recipe print functionality enhancements",
+      "Reduced recipe title text size by 30%",
+      "Made additional notes header smaller than other section headers",
+      "Made text in additional notes field the same size as other text elements",
+      "Improved print pagination algorithm for better content distribution",
+      "Enhanced image handling in printed recipes"
     ]
   },
   "versionHistory": [
+    {
+      "versionCode": 10009,
+      "versionName": "1.0.9",
+      "releaseDate": "2025-09-09",
+      "changes": [
+        "Recipe print functionality enhancements",
+        "Reduced recipe title text size by 30%",
+        "Made additional notes header smaller than other section headers",
+        "Made text in additional notes field the same size as other text elements",
+        "Improved print pagination algorithm for better content distribution",
+        "Enhanced image handling in printed recipes"
+      ]
+    },
+    {
+      "versionCode": 10008,
+      "versionName": "1.0.8",
+      "releaseDate": "2025-09-08",
+      "changes": [
+        "Implemented automatic update checking system",
+        "Added update notification dialog",
+        "Integrated with GitHub Releases for version checking",
+        "Added version comparison functionality"
+      ]
+    },
+    {
+      "versionCode": 10007,
+      "versionName": "1.0.7",
+      "releaseDate": "2025-09-05",
+      "changes": [
+        "Updated AdMob credentials",
+        "Updated AdMob App ID to ca-app-pub-3031011439814812~7902738145",
+        "Updated AdMob interstitial ad unit ID to ca-app-pub-3031011439814812/8213142605",
+        "Updated AdMob banner ad unit ID to ca-app-pub-3031011439814812/8213142605"
+      ]
+    },
+    {
+      "versionCode": 10006,
+      "versionName": "1.0.6",
+      "releaseDate": "2025-09-04",
+      "changes": [
+        "Fixed import functionality for backward compatibility",
+        "Fixed RecipeBackupManager error handling",
+        "Improved TestImportActivity error reporting",
+        "UI improvements: Adjusted spacing between top bar and recipe list",
+        "UI improvements: Moved AdMob banner to bottom of screen",
+        "UI improvements: Improved positioning of copyright text",
+        "UI improvements: Fixed top bar overlapping with status bar",
+        "UI improvements: Enhanced button alignment and sizing"
+      ]
+    },
     {
       "versionCode": 10002,
       "versionName": "1.0.2",

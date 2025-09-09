@@ -44,38 +44,27 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "IS_DEBUG", "false"
             // Add signing config for release builds
             signingConfig signingConfigs.debug // In production, use a proper release signing config
-            
-            // Customize the output APK filename for release builds
-            applicationVariants.all { variant ->
-                variant.outputs.all {
-                    if (variant.name == "release") {
-                        outputFileName = "paleobyleorecipes-${variant.versionName}.apk"
-                    } else {
-                        outputFileName = "paleobyleorecipes-${variant.versionName}-debug.apk"
-                    }
-                }
-            }
         }
         debug {
             applicationIdSuffix ".debug"
             debuggable true
             buildConfigField "boolean", "IS_DEBUG", "true"
             minifyEnabled false
-            
-            // Customize the output APK filename for debug builds
-            applicationVariants.all { variant ->
-                variant.outputs.all {
-                    if (variant.name == "release") {
-                        outputFileName = "paleobyleorecipes-${variant.versionName}.apk"
-                    } else {
-                        outputFileName = "paleobyleorecipes-${variant.versionName}-debug.apk"
-                    }
-                }
+        }
+    }
+
+    // Customize the output APK filename for all variants
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.name == "release") {
+                outputFileName = "paleobyleorecipes-${variant.versionName}.apk"
+            } else {
+                outputFileName = "paleobyleorecipes-${variant.versionName}-debug.apk"
             }
         }
     }

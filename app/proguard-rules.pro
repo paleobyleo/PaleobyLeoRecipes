@@ -79,11 +79,37 @@
 # Keep activities
 -keep class com.leo.paleorecipes.**Activity { *; }
 
-# Optimize aggressively
+# Keep all classes in the main package to avoid R8 issues
+-keep class com.leo.paleorecipes.** { *; }
+
+# Add the missing rules suggested by R8
+-dontwarn com.leo.paleorecipes.AboutPaleoActivity
+-dontwarn com.leo.paleorecipes.AddEditRecipeActivity
+-dontwarn com.leo.paleorecipes.AddRecipeActivity
+-dontwarn com.leo.paleorecipes.ComposableSingletons$MainActivityComposeKt
+-dontwarn com.leo.paleorecipes.ComposableSingletons$OcrScanActivityKt
+-dontwarn com.leo.paleorecipes.adapter.IngredientsAdapter
+-dontwarn com.leo.paleorecipes.adapter.RecipesAdapter
+-dontwarn com.leo.paleorecipes.data.AppDatabase$Companion
+-dontwarn com.leo.paleorecipes.data.AppDatabase
+-dontwarn com.leo.paleorecipes.data.Converters
+-dontwarn com.leo.paleorecipes.data.Recipe
+-dontwarn com.leo.paleorecipes.data.RecipeDao
+-dontwarn com.leo.paleorecipes.data.api.ApiClient
+-dontwarn com.leo.paleorecipes.data.api.SpoonacularApiService
+-dontwarn com.leo.paleorecipes.data.local.dao.IngredientDao
+-dontwarn com.leo.paleorecipes.data.local.entity.IngredientEntity
+-dontwarn com.leo.paleorecipes.data.repository.IngredientRepository
+-dontwarn com.leo.paleorecipes.data.repository.IngredientRepositoryImpl
+-dontwarn com.leo.paleorecipes.data.repository.RecipeRepository
+-dontwarn com.leo.paleorecipes.data.repository.RecipeRepositoryImpl
+
+# Optimize aggressively but avoid conflicts
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 -optimizationpasses 5
 -allowaccessmodification
 
-# Reduce size
--repackageclasses ''
--flattenpackagehierarchy
+# Reduce size but avoid conflicts with repackageclasses
+# Comment out the conflicting directives
+# -repackageclasses ''
+# -flattenpackagehierarchy

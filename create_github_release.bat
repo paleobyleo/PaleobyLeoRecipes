@@ -1,19 +1,20 @@
 @echo off
 setlocal enabledelayedexpansion
 
-echo Creating GitHub Release for PaleobyLeoRecipes v1.0.2
+echo Creating GitHub Release for PaleobyLeoRecipes v1.0.9
 echo ===================================================
 
 REM Check if required files exist
-if not exist "app\build\outputs\apk\release\paleobyleorecipes-1.0.2.apk" (
-    echo Error: APK file not found at app\build\outputs\apk\release\paleobyleorecipes-1.0.2.apk
+if not exist "app\build\outputs\apk\release\paleobyleorecipes-1.0.9.apk" (
+    echo Error: APK file not found at app\build\outputs\apk\release\paleobyleorecipes-1.0.9.apk
     echo Please build the release APK first using ./gradlew assembleRelease
     pause
     exit /b 1
 )
 
-if not exist "RELEASE_NOTES.md" (
-    echo Error: RELEASE_NOTES.md not found
+if not exist "RELEASE_NOTES_v1.0.9.md" (
+    echo Error: RELEASE_NOTES_v1.0.9.md not found
+    echo Please create release notes for version 1.0.9
     pause
     exit /b 1
 )
@@ -21,9 +22,9 @@ if not exist "RELEASE_NOTES.md" (
 REM Set variables
 set REPO_OWNER=paleobyleo
 set REPO_NAME=PaleobyLeoRecipes
-set TAG_NAME=v1.0.2
-set RELEASE_NAME=Release v1.0.2
-set APK_PATH=app\build\outputs\apk\release\paleobyleorecipes-1.0.2.apk
+set TAG_NAME=v1.0.9
+set RELEASE_NAME=Release v1.0.9
+set APK_PATH=app\build\outputs\apk\release\paleobyleorecipes-1.0.9.apk
 
 echo.
 echo Please create a GitHub Personal Access Token with 'repo' scope at:
@@ -49,7 +50,7 @@ curl -X POST ^
   -H "Authorization: token %GITHUB_TOKEN%" ^
   -H "Accept: application/vnd.github.v3+json" ^
   https://api.github.com/repos/%REPO_OWNER%/%REPO_NAME%/releases ^
-  -d "{\"tag_name\":\"%TAG_NAME%\",\"name\":\"%RELEASE_NAME%\",\"body\":\"$(type RELEASE_NOTES.md)\",\"draft\":false,\"prerelease\":false}"
+  -d "{\"tag_name\":\"%TAG_NAME%\",\"name\":\"%RELEASE_NAME%\",\"body\":\"$(type RELEASE_NOTES_v1.0.9.md)\",\"draft\":false,\"prerelease\":false}"
 
 if %errorlevel% neq 0 (
     echo Error: Failed to create release

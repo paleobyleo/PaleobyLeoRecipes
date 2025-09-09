@@ -3,17 +3,26 @@ import java.text.SimpleDateFormat
 // Versioning configuration
 ext {
     // Load version information from properties file
-    def versionPropsFile = file("version.properties")
+    def versionPropsFile = file("$rootDir/version.properties")
     def versionProps = new Properties()
     
     if (versionPropsFile.exists()) {
         versionPropsFile.withInputStream { versionProps.load(it) }
+        println "Version properties file found and loaded: " + versionPropsFile.absolutePath
+        println "VERSION_MAJOR: " + versionProps.getProperty("VERSION_MAJOR", "1")
+        println "VERSION_MINOR: " + versionProps.getProperty("VERSION_MINOR", "0")
+        println "VERSION_PATCH: " + versionProps.getProperty("VERSION_PATCH", "0")
+    } else {
+        println "Version properties file not found at: " + versionPropsFile.absolutePath
     }
     
     // Version name format: MAJOR.MINOR.PATCH
     versionMajor = versionProps.getProperty("VERSION_MAJOR", "1").toInteger()
     versionMinor = versionProps.getProperty("VERSION_MINOR", "0").toInteger()
     versionPatch = versionProps.getProperty("VERSION_PATCH", "0").toInteger()
+    
+    // Print version information for debugging
+    println "Loaded version from properties: ${versionMajor}.${versionMinor}.${versionPatch}"
     
     // Get the current version code
     getVersionCode = {
@@ -23,12 +32,16 @@ ext {
         // 3. Git commit count: return getGitCommitCount()
         
         // For now, using a simple increment strategy
-        return versionMajor * 10000 + versionMinor * 100 + versionPatch
+        def code = versionMajor * 10000 + versionMinor * 100 + versionPatch
+        println "Calculated version code: ${code}"
+        return code
     }
     
     // Get the current version name
     getVersionName = {
-        return "${versionMajor}.${versionMinor}.${versionPatch}"
+        def name = "${versionMajor}.${versionMinor}.${versionPatch}"
+        println "Calculated version name: ${name}"
+        return name
     }
     
     // Get current date for release date
@@ -87,7 +100,7 @@ ext {
 // Task to increment version patch number
 task incrementPatchVersion {
     doLast {
-        def versionPropsFile = file("version.properties")
+        def versionPropsFile = file("$rootDir/version.properties")
         def versionProps = new Properties()
         
         if (versionPropsFile.exists()) {
@@ -106,7 +119,7 @@ task incrementPatchVersion {
 // Task to increment version minor number
 task incrementMinorVersion {
     doLast {
-        def versionPropsFile = file("version.properties")
+        def versionPropsFile = file("$rootDir/version.properties")
         def versionProps = new Properties()
         
         if (versionPropsFile.exists()) {
@@ -126,7 +139,7 @@ task incrementMinorVersion {
 // Task to increment version major number
 task incrementMajorVersion {
     doLast {
-        def versionPropsFile = file("version.properties")
+        def versionPropsFile = file("$rootDir/version.properties")
         def versionProps = new Properties()
         
         if (versionPropsFile.exists()) {
@@ -147,14 +160,14 @@ task incrementMajorVersion {
 // Create version.properties file if it doesn't exist
 task createVersionProperties {
     doLast {
-        def versionPropsFile = file("version.properties")
+        def versionPropsFile = file("$rootDir/version.properties")
         if (!versionPropsFile.exists()) {
             def versionProps = new Properties()
             versionProps.setProperty("VERSION_MAJOR", "1")
             versionProps.setProperty("VERSION_MINOR", "0")
             versionProps.setProperty("VERSION_PATCH", "0")
             versionPropsFile.withOutputStream { versionProps.store(it, null) }
-            println "Created version.properties file"
+            println "Created version.properties file at: " + versionPropsFile.absolutePath
         }
     }
 }
@@ -163,7 +176,7 @@ task createVersionProperties {
 task updateVersion {
     dependsOn createVersionProperties
     doLast {
-        def versionPropsFile = file("version.properties")
+        def versionPropsFile = file("$rootDir/version.properties")
         def versionProps = new Properties()
         
         if (versionPropsFile.exists()) {
@@ -174,7 +187,7 @@ task updateVersion {
         ext.versionMinor = versionProps.getProperty("VERSION_MINOR", "0").toInteger()
         ext.versionPatch = versionProps.getProperty("VERSION_PATCH", "0").toInteger()
         
-        println "Current version: ${versionMajor}.${versionMinor}.${versionPatch}"
+        println "Current version in updateVersion task: ${versionMajor}.${versionMinor}.${versionPatch}"
         
         // Update version history file
         updateVersionHistory(project)

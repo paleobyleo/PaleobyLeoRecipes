@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.10] - 2025-09-09
+
+### Added
+- Re-release of version 1.0.9 functionality after GitHub release deletion
+
+### Improvements
+- Recipe print functionality enhancements
+  - Reduced recipe title text size by 30%
+  - Made additional notes header smaller than other section headers
+  - Made text in additional notes field the same size as other text elements
+- Improved print pagination algorithm for better content distribution
+- Enhanced image handling in printed recipes
+
 ## [1.0.9] - 2025-09-09
 
 ### Improvements
